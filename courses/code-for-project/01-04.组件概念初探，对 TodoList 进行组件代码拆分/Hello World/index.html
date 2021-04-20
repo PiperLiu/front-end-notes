@@ -44,8 +44,11 @@
     `
   });
 
+  // 不可以先挂载，再注册组件
+  // 把 app.mount('#root'); 放在注册后
+
   app.component('todo-item', {
-    props: ['content', 'index'],
+    props: ['content', 'index'],  // 接收外部给这个组件的属性值
     template: '<li>{{index}} -- {{content}}</li>'
   });
 
