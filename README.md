@@ -11,3 +11,11 @@
 
 ## 项目结构介绍
 - 我学过的课程在 [./courses/README.md](./courses/README.md)
+
+## 笔记索引
+### vue3
+关于 vue3 的课程：
+- [./courses/code-for-project](./courses/code-for-project)
+
+关于 vue3 的笔记：
+- [./notes/vue/README.md](./notes/vue/README.md)
