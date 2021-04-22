@@ -10,6 +10,7 @@
   - [04数据，方法，计算属性和侦听器](#04数据方法计算属性和侦听器)
   - [05样式绑定语法](#05样式绑定语法)
   - [06条件渲染](#06条件渲染)
+  - [07列表循环渲染](#07列表循环渲染)
 
 <!-- /code_chunk_output -->
 
@@ -60,3 +61,13 @@
 [./drafts/0106条件渲染.md](./drafts/0106条件渲染.md)
 
 `v-if` 和 `v-else-if` `v-else` 以及 `v-show` 。
+
+### 07列表循环渲染
+[./drafts/0107列表渲染循环.md](./drafts/0107列表渲染循环.md)
+
+- [(value, key, index)](./drafts/0107列表渲染循环.md#value-key-index)
+- [复用 dom 元素（:key）](./drafts/0107列表渲染循环.md#复用-dom-元素key)
+- [数组的变更函数](./drafts/0107列表渲染循环.md#数组的变更函数)
+- [v-for="item in 10"](./drafts/0107列表渲染循环.md#v-foritem-in-10)
+- [v-for 与 v-if](./drafts/0107列表渲染循环.md#v-for-与-v-if)
+- [template](./drafts/0107列表渲染循环.md#template)
