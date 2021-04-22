@@ -11,6 +11,7 @@
   - [05样式绑定语法](#05样式绑定语法)
   - [06条件渲染](#06条件渲染)
   - [07列表循环渲染](#07列表循环渲染)
+  - [08事件绑定](#08事件绑定)
 
 <!-- /code_chunk_output -->
 
@@ -71,3 +72,22 @@
 - [v-for="item in 10"](./drafts/0107列表渲染循环.md#v-foritem-in-10)
 - [v-for 与 v-if](./drafts/0107列表渲染循环.md#v-for-与-v-if)
 - [template](./drafts/0107列表渲染循环.md#template)
+
+### 08事件绑定
+[./drafts/0108事件绑定.md](./drafts/0108事件绑定.md)
+
+- [$event](./drafts/0108事件绑定.md#event)
+- [一个事件，多个函数](./drafts/0108事件绑定.md#一个事件多个函数)
+- [修饰符](./drafts/0108事件绑定.md#修饰符)
+  - [事件修饰符](./drafts/0108事件绑定.md#事件修饰符)
+    - [stop](./drafts/0108事件绑定.md#stop)
+    - [self](./drafts/0108事件绑定.md#self)
+    - [capture](./drafts/0108事件绑定.md#capture)
+    - [passive](./drafts/0108事件绑定.md#passive)
+    - [prevent](./drafts/0108事件绑定.md#prevent)
+    - [once](./drafts/0108事件绑定.md#once)
+  - [按键修饰符](./drafts/0108事件绑定.md#按键修饰符)
+    - [enter](./drafts/0108事件绑定.md#enter)
+    - [其他常用的](./drafts/0108事件绑定.md#其他常用的)
+  - [鼠标修饰符](./drafts/0108事件绑定.md#鼠标修饰符)
+  - [精确修饰符 exact](./drafts/0108事件绑定.md#精确修饰符-exact)
