@@ -12,6 +12,7 @@
   - [06条件渲染](#06条件渲染)
   - [07列表循环渲染](#07列表循环渲染)
   - [08事件绑定](#08事件绑定)
+  - [09表单中的双向绑定指令的使用](#09表单中的双向绑定指令的使用)
 
 <!-- /code_chunk_output -->
 
@@ -91,3 +92,17 @@
     - [其他常用的](./drafts/0108事件绑定.md#其他常用的)
   - [鼠标修饰符](./drafts/0108事件绑定.md#鼠标修饰符)
   - [精确修饰符 exact](./drafts/0108事件绑定.md#精确修饰符-exact)
+
+### 09表单中的双向绑定指令的使用
+[./drafts/0109表单中的双向绑定指令的使用.md](./drafts/0109表单中的双向绑定指令的使用.md)
+
+- [input](./drafts/0109表单中的双向绑定指令的使用.md#input)
+- [textarea](./drafts/0109表单中的双向绑定指令的使用.md#textarea)
+- [checkbox](./drafts/0109表单中的双向绑定指令的使用.md#checkbox)
+- [radio](./drafts/0109表单中的双向绑定指令的使用.md#radio)
+- [select](./drafts/0109表单中的双向绑定指令的使用.md#select)
+- [checkbox true-value](./drafts/0109表单中的双向绑定指令的使用.md#checkbox-true-value)
+- [修饰符](./drafts/0109表单中的双向绑定指令的使用.md#修饰符)
+  - [lazy](./drafts/0109表单中的双向绑定指令的使用.md#lazy)
+  - [number](./drafts/0109表单中的双向绑定指令的使用.md#number)
+  - [trim](./drafts/0109表单中的双向绑定指令的使用.md#trim)
