@@ -17,6 +17,7 @@
   - [01组件的定义及复用性，局部组件和全局组件](#01组件的定义及复用性局部组件和全局组件)
   - [02组件间传值及传值校验](#02组件间传值及传值校验)
   - [03单向数据流](#03单向数据流)
+  - [04Non-Props属性](#04non-props属性)
 
 <!-- /code_chunk_output -->
 
@@ -131,3 +132,10 @@
 - [v-bind="params"](./drafts/0203单向数据流.md#v-bindparams)
 - [大小写](./drafts/0203单向数据流.md#大小写)
 - [子组件能用父组件，但是不能改](./drafts/0203单向数据流.md#子组件能用父组件但是不能改)
+
+### 04Non-Props属性
+[./drafts/0204Non-Props属性.md](./drafts/0204Non-Props属性.md)
+
+- [子组件是否接收](./drafts/0204Non-Props属性.md#子组件是否接收)
+  - [inheritAttrs](./drafts/0204Non-Props属性.md#inheritattrs)
+- [子组件多个根元素](./drafts/0204Non-Props属性.md#子组件多个根元素)
