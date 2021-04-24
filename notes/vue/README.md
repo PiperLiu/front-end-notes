@@ -23,6 +23,7 @@
   - [07使用插槽和具名插槽解决组件内容传递问题](#07使用插槽和具名插槽解决组件内容传递问题)
   - [08作用域插槽](#08作用域插槽)
   - [09动态组件和异步组件](#09动态组件和异步组件)
+  - [10v-once、ref和provide/inject](#10v-once-ref和provideinject)
 
 <!-- /code_chunk_output -->
 
@@ -177,3 +178,10 @@
   - [component :is](./drafts/0209动态组件和异步组件.md#component-is)
   - [缓存keep-alive](./drafts/0209动态组件和异步组件.md#缓存keep-alive)
 - [异步组件](./drafts/0209动态组件和异步组件.md#异步组件)
+
+### 10v-once、ref和provide/inject
+[./drafts/0210v-once、ref和provide.md](./drafts/0210v-once、ref和provide.md)
+
+- [v-once](./drafts/0210v-once、ref和provide.md#v-once)
+- [ref](./drafts/0210v-once、ref和provide.md#ref)
+- [provide / inject](./drafts/0210v-once、ref和provide.md#provide-inject)
