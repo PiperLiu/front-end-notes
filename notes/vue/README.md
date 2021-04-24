@@ -29,6 +29,7 @@
     - [02使用transition标签实现单元素组件的过渡和动画效果](#02使用transition标签实现单元素组件的过渡和动画效果)
     - [03组件和元素切换动画的实现](#03组件和元素切换动画的实现)
     - [04列表动画](#04列表动画)
+    - [状态动画](#状态动画)
 
 <!-- /code_chunk_output -->
 
@@ -224,3 +225,6 @@
 
 - [transition-group](./drafts/0304列表动画.md#transition-group)
 - [v-move](./drafts/0304列表动画.md#v-move)
+
+### 05状态动画
+[./drafts/0305状态动画.md](./drafts/0305状态动画.md)
