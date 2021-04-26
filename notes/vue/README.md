@@ -33,6 +33,7 @@
   - [04高级语法](#04高级语法)
     - [01Mixin混入的基础语法](#01mixin混入的基础语法)
     - [02开发实现Vue中的自定义指令](#02开发实现vue中的自定义指令)
+    - [03Teleport传送门](#03teleport传送门)
 
 <!-- /code_chunk_output -->
 
@@ -251,3 +252,11 @@
   - [传入参数](./drafts/0402开发实现Vue中的自定义指令.md#传入参数)
   - [mounted()和updated()简写](./drafts/0402开发实现Vue中的自定义指令.md#mounted和updated简写)
   - [binding.arg](./drafts/0402开发实现Vue中的自定义指令.md#bindingarg)
+
+### 03Teleport传送门
+Vue3 新特性。
+
+[./drafts/0403Teleport传送门.md](./drafts/0403Teleport传送门.md)
+
+- [需求：做个蒙层](./drafts/0403Teleport传送门.md#需求做个蒙层)
+- [传送门Teleport](./drafts/0403Teleport传送门.md#传送门teleport)
