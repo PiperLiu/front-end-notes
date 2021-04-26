@@ -32,6 +32,7 @@
     - [05状态动画](#05状态动画)
   - [04高级语法](#04高级语法)
     - [01Mixin混入的基础语法](#01mixin混入的基础语法)
+    - [02开发实现Vue中的自定义指令](#02开发实现vue中的自定义指令)
 
 <!-- /code_chunk_output -->
 
@@ -240,3 +241,13 @@
 - [全局Mixin](./drafts/0401Mixin混入的基础语法.md#全局mixin)
 - [自定义属性](./drafts/0401Mixin混入的基础语法.md#自定义属性)
   - [修改优先级](./drafts/0401Mixin混入的基础语法.md#修改优先级)
+
+### 02开发实现Vue中的自定义指令
+[./drafts/0402开发实现Vue中的自定义指令.md](./drafts/0402开发实现Vue中的自定义指令.md)
+- [自定义指令directive](./drafts/0402开发实现Vue中的自定义指令.md#自定义指令directive)
+  - [局部指令](./drafts/0402开发实现Vue中的自定义指令.md#局部指令)
+  - [其他生命周期函数](./drafts/0402开发实现Vue中的自定义指令.md#其他生命周期函数)
+- [例子：pos指令](./drafts/0402开发实现Vue中的自定义指令.md#例子pos指令)
+  - [传入参数](./drafts/0402开发实现Vue中的自定义指令.md#传入参数)
+  - [mounted()和updated()简写](./drafts/0402开发实现Vue中的自定义指令.md#mounted和updated简写)
+  - [binding.arg](./drafts/0402开发实现Vue中的自定义指令.md#bindingarg)
