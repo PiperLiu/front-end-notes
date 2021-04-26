@@ -35,6 +35,7 @@
     - [02开发实现Vue中的自定义指令](#02开发实现vue中的自定义指令)
     - [03Teleport传送门](#03teleport传送门)
     - [03更加底层的render函数](#03更加底层的render函数)
+    - [04插件的定义和使用](#04插件的定义和使用)
 
 <!-- /code_chunk_output -->
 
@@ -269,3 +270,10 @@ Vue3 新特性。
 - [反例：用v-if](./drafts/0403Teleport传送门.md#反例用v-if)
 - [用render不用template](./drafts/0403Teleport传送门.md#用render不用template)
 - [虚拟DOM](./drafts/0403Teleport传送门.md#虚拟dom)
+
+### 04插件的定义和使用
+[./drafts/0405插件的定义和使用.md](./drafts/0405插件的定义和使用.md)
+
+- [plugin插件](./drafts/0405插件的定义和使用.md#plugin插件)
+- [得到app实例，可以做很多扩展](./drafts/0405插件的定义和使用.md#得到app实例可以做很多扩展)
+  - [globalProperties](./drafts/0405插件的定义和使用.md#globalproperties)
