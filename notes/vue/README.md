@@ -34,8 +34,9 @@
     - [01Mixin混入的基础语法](#01mixin混入的基础语法)
     - [02开发实现Vue中的自定义指令](#02开发实现vue中的自定义指令)
     - [03Teleport传送门](#03teleport传送门)
-    - [03更加底层的render函数](#03更加底层的render函数)
-    - [04插件的定义和使用](#04插件的定义和使用)
+    - [04更加底层的render函数](#04更加底层的render函数)
+    - [05插件的定义和使用](#05插件的定义和使用)
+    - [06数据校验插件开发实例](#06数据校验插件开发实例)
 
 <!-- /code_chunk_output -->
 
@@ -263,7 +264,7 @@ Vue3 新特性。
 - [需求：做个蒙层](./drafts/0403Teleport传送门.md#需求做个蒙层)
 - [传送门Teleport](./drafts/0403Teleport传送门.md#传送门teleport)
 
-### 03更加底层的render函数
+### 04更加底层的render函数
 [./drafts/0403Teleport传送门.md](./drafts/0403Teleport传送门.md)
 
 - [希望h1/h2/h3受到标签控制](./drafts/0403Teleport传送门.md#希望h1h2h3受到标签控制)
@@ -271,9 +272,16 @@ Vue3 新特性。
 - [用render不用template](./drafts/0403Teleport传送门.md#用render不用template)
 - [虚拟DOM](./drafts/0403Teleport传送门.md#虚拟dom)
 
-### 04插件的定义和使用
+### 05插件的定义和使用
 [./drafts/0405插件的定义和使用.md](./drafts/0405插件的定义和使用.md)
 
 - [plugin插件](./drafts/0405插件的定义和使用.md#plugin插件)
 - [得到app实例，可以做很多扩展](./drafts/0405插件的定义和使用.md#得到app实例可以做很多扩展)
   - [globalProperties](./drafts/0405插件的定义和使用.md#globalproperties)
+
+### 06数据校验插件开发实例
+[./drafts/0406数据校验插件开发实例.md](./drafts/0406数据校验插件开发实例.md)
+
+- [校验数据](./drafts/0406数据校验插件开发实例.md#校验数据)
+- [用mixin](./drafts/0406数据校验插件开发实例.md#用mixin)
+- [用plugin](./drafts/0406数据校验插件开发实例.md#用plugin)
