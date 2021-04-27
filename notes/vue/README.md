@@ -37,6 +37,8 @@
     - [04更加底层的render函数](#04更加底层的render函数)
     - [05插件的定义和使用](#05插件的定义和使用)
     - [06数据校验插件开发实例](#06数据校验插件开发实例)
+- [05Composition API](#05composition-api)
+    - [01Setup函数的使用](#01setup函数的使用)
 
 <!-- /code_chunk_output -->
 
@@ -285,3 +287,11 @@ Vue3 新特性。
 - [校验数据](./drafts/0406数据校验插件开发实例.md#校验数据)
 - [用mixin](./drafts/0406数据校验插件开发实例.md#用mixin)
 - [用plugin](./drafts/0406数据校验插件开发实例.md#用plugin)
+
+# 05Composition API
+
+### 01Setup函数的使用
+[./drafts/0501Setup函数的使用.md](./drafts/0501Setup函数的使用.md)
+
+- [为什么会有CompositionAPI](./drafts/0501Setup函数的使用.md#为什么会有compositionapi)
+- [setup](./drafts/0501Setup函数的使用.md#setup)
