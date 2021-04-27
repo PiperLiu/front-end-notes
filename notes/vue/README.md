@@ -45,6 +45,7 @@
     - [05computed方法生成计算属性](#05computed方法生成计算属性)
     - [06watch以及其与watchEffect的差异性](#06watch以及其与watcheffect的差异性)
     - [07生命周期函数的新写法](#07生命周期函数的新写法)
+    - [08Provide、Inject、模板ref用法](#08provide-inject-模板ref用法)
 
 <!-- /code_chunk_output -->
 
@@ -358,3 +359,11 @@ Vue3 新特性。
 - [beforeCreate和created不能用](./drafts/0507生命周期函数的新写法.md#beforecreate和created不能用)
 - [onRenderTracked](./drafts/0507生命周期函数的新写法.md#onrendertracked)
 - [onRenderTriggered](./drafts/0507生命周期函数的新写法.md#onrendertriggered)
+
+### 08Provide、Inject、模板ref用法
+[./drafts/0508Provide、Inject、模板ref用法.md](./drafts/0508Provide、Inject、模板ref用法.md)
+
+- [provide和inject](./drafts/0508Provide、Inject、模板ref用法.md#provide和inject)
+  - [更好地应用单向数据流](./drafts/0508Provide、Inject、模板ref用法.md#更好地应用单向数据流)
+  - [应用readonly更加安全](./drafts/0508Provide、Inject、模板ref用法.md#应用readonly更加安全)
+- [模板ref用法](./drafts/0508Provide、Inject、模板ref用法.md#模板ref用法)
