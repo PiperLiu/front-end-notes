@@ -318,3 +318,8 @@ Vue3 新特性。
   - [attrs是父组件的Non-Props](./drafts/0503toRef以及context参数.md#attrs是父组件的non-props)
   - [slots是插槽](./drafts/0503toRef以及context参数.md#slots是插槽)
   - [emit](./drafts/0503toRef以及context参数.md#emit)
+
+### 04实例：用Composition-API开发to-do-list
+把数据和数据操作摘出来，封装成小的函数，并不完全放在 setup 里。
+
+[./drafts/0504实例：用Composition-API开发to-do-list.md](./drafts/0504实例：用Composition-API开发to-do-list.md)
