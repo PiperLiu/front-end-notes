@@ -77,14 +77,15 @@ const app = Vue.createApp({
 ```js
 template: `
   <div>{{nameObj.name}}</div>
-`
-
-const { reactive } = Vue;
-const nameObj = reactive({ name: 'dell' });
-setTimeout(() => {
-  nameObj.name = 'lee'
-}, 2000)
-return { nameObj }
+`,
+setup(props, context) {
+  const { reactive } = Vue;
+  const nameObj = reactive({ name: 'dell' });
+  setTimeout(() => {
+    nameObj.name = 'lee'
+  }, 2000)
+  return { nameObj }
+}
 ```
 
 如上，我们对一个对象做了响应式的声明。
@@ -92,14 +93,16 @@ return { nameObj }
 ```js
 template: `
   <div>{{nameObj[0]}}</div>
-`
+`,
 
-const { reactive } = Vue;
-const nameObj = reactive([456]);
-setTimeout(() => {
-  nameObj[0] = 123
-}, 2000)
-return { nameObj }
+setup(props, context) {
+  const { reactive } = Vue;
+  const nameObj = reactive([456]);
+  setTimeout(() => {
+    nameObj[0] = 123
+  }, 2000)
+  return { nameObj }
+}
 ```
 
 如上，我们对一个数组做了响应式的声明。
@@ -110,16 +113,18 @@ return { nameObj }
 ```js
 template: `
   <div>{{nameObj[0]}}</div>
-`
+`,
 
-const { reactive, readonly } = Vue;
-const nameObj = reactive([456]);
-const copyNameObj = readonly(nameObj);
-setTimeout(() => {
-  nameObj[0] = 123;
-  copyNameObj[0] = 123;
-}, 2000)
-return { nameObj, copyNameObj }
+setup(props, context) {
+  const { reactive, readonly } = Vue;
+  const nameObj = reactive([456]);
+  const copyNameObj = readonly(nameObj);
+  setTimeout(() => {
+    nameObj[0] = 123;
+    copyNameObj[0] = 123;
+  }, 2000)
+  return { nameObj, copyNameObj }
+}
 ```
 
 readonly 会让 `copyNameObj[0] = 123;` 报错。
@@ -130,16 +135,18 @@ readonly 会让 `copyNameObj[0] = 123;` 报错。
 ```js
 template: `
   <div>{{name}}</div>
-`
+`,
 
-const { reactive } = Vue;
-const nameObj = reactive({ name: 'dell' });
-setTimeout(() => {
-  nameObj.name = 'lee'
-}, 2000)
+setup(props, context) {
+  const { reactive } = Vue;
+  const nameObj = reactive({ name: 'dell' });
+  setTimeout(() => {
+    nameObj.name = 'lee'
+  }, 2000)
 
-const { name } = nameObj;
-return { name }
+  const { name } = nameObj;
+  return { name }
+}
 ```
 
 如上，并不会响应式。因为 `nameObj` 是响应式的，但是其中值 `name` 并不是。
@@ -149,17 +156,19 @@ return { name }
 ```js
 template: `
   <div>{{name}}</div>
-`
+`,
 
-const { reactive } = Vue;
-const nameObj = reactive({ name: 'dell' });
-setTimeout(() => {
-  nameObj.name = 'lee'
-}, 2000)
+setup(props, context) {
+  const { reactive } = Vue;
+  const nameObj = reactive({ name: 'dell' });
+  setTimeout(() => {
+    nameObj.name = 'lee'
+  }, 2000)
 
-// toRefs
-// 把 proxy({ name: 'dell' })
-// 变成 { name: proxy({ value: 'dell' }) }
-const { name } = toRefs(nameObj);
-return { name }
+  // toRefs
+  // 把 proxy({ name: 'dell' })
+  // 变成 { name: proxy({ value: 'dell' }) }
+  const { name } = toRefs(nameObj);
+  return { name }
+}
 ```
