@@ -44,7 +44,7 @@
     - [04实例：用Composition-API开发to-do-list](#04实例用composition-api开发to-do-list)
     - [05computed方法生成计算属性](#05computed方法生成计算属性)
     - [06watch以及其与watchEffect的差异性](#06watch以及其与watcheffect的差异性)
-    - [07](#07)
+    - [07生命周期函数的新写法](#07生命周期函数的新写法)
 
 <!-- /code_chunk_output -->
 
@@ -351,3 +351,10 @@ Vue3 新特性。
   - [有没有办法把watch变为非惰性?immediate: true](./drafts/0506watch以及其与watchEffect的差异性.md#有没有办法把watch变为非惰性immediate-true)
 
 ### 07生命周期函数的新写法
+[./drafts/0507生命周期函数的新写法.md](./drafts/0507生命周期函数的新写法.md)
+
+- [onBeforeMount](./drafts/0507生命周期函数的新写法.md#onbeforemount)
+- [其他生命周期函数](./drafts/0507生命周期函数的新写法.md#其他生命周期函数)
+- [beforeCreate和created不能用](./drafts/0507生命周期函数的新写法.md#beforecreate和created不能用)
+- [onRenderTracked](./drafts/0507生命周期函数的新写法.md#onrendertracked)
+- [onRenderTriggered](./drafts/0507生命周期函数的新写法.md#onrendertriggered)
