@@ -43,6 +43,8 @@
     - [03toRef以及context参数](#03toref以及context参数)
     - [04实例：用Composition-API开发to-do-list](#04实例用composition-api开发to-do-list)
     - [05computed方法生成计算属性](#05computed方法生成计算属性)
+    - [06watch以及其与watchEffect的差异性](#06watch以及其与watcheffect的差异性)
+    - [07](#07)
 
 <!-- /code_chunk_output -->
 
@@ -333,3 +335,19 @@ Vue3 新特性。
 - [set和get方法](./drafts/0505computed方法生成计算属性.md#set和get方法)
   - [set的param](./drafts/0505computed方法生成计算属性.md#set的param)
   - [实例：一个对象](./drafts/0505computed方法生成计算属性.md#实例一个对象)
+
+### 06watch以及其与watchEffect的差异性
+[./drafts/0506watch以及其与watchEffect的差异性.md](./drafts/0506watch以及其与watchEffect的差异性.md)
+
+- [watch](./drafts/0506watch以及其与watchEffect的差异性.md#watch)
+  - [具备一定lazy惰性属性](./drafts/0506watch以及其与watchEffect的差异性.md#具备一定lazy惰性属性)
+  - [参数可以拿到原始和当前值](./drafts/0506watch以及其与watchEffect的差异性.md#参数可以拿到原始和当前值)
+  - [watch可以接收一组数组](./drafts/0506watch以及其与watchEffect的差异性.md#watch可以接收一组数组)
+- [watchEffect](./drafts/0506watch以及其与watchEffect的差异性.md#watcheffect)
+  - [立即执行，没有惰性immediate](./drafts/0506watch以及其与watchEffect的差异性.md#立即执行没有惰性immediate)
+  - [不需要传递侦听的内容](./drafts/0506watch以及其与watchEffect的差异性.md#不需要传递侦听的内容)
+  - [watchEffect不能获取数据之前的值](./drafts/0506watch以及其与watchEffect的差异性.md#watcheffect不能获取数据之前的值)
+- [取消侦听器](./drafts/0506watch以及其与watchEffect的差异性.md#取消侦听器)
+  - [有没有办法把watch变为非惰性?immediate: true](./drafts/0506watch以及其与watchEffect的差异性.md#有没有办法把watch变为非惰性immediate-true)
+
+### 07生命周期函数的新写法
