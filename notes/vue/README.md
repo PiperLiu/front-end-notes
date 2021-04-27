@@ -39,6 +39,7 @@
     - [06数据校验插件开发实例](#06数据校验插件开发实例)
 - [05Composition API](#05composition-api)
     - [01Setup函数的使用](#01setup函数的使用)
+    - [02ref，reactive响应式引用的用法和原理](#02refreactive响应式引用的用法和原理)
 
 <!-- /code_chunk_output -->
 
@@ -295,3 +296,14 @@ Vue3 新特性。
 
 - [为什么会有CompositionAPI](./drafts/0501Setup函数的使用.md#为什么会有compositionapi)
 - [setup](./drafts/0501Setup函数的使用.md#setup)
+
+### 02ref，reactive响应式引用的用法和原理
+[./drafts/0502ref，reactive响应式引用的用法和原理.md](./drafts/0502ref，reactive响应式引用的用法和原理.md)
+
+- [非响应式数据](./drafts/0502ref，reactive响应式引用的用法和原理.md#非响应式数据)
+- [响应式的引用](./drafts/0502ref，reactive响应式引用的用法和原理.md#响应式的引用)
+  - [基础类型数据ref](./drafts/0502ref，reactive响应式引用的用法和原理.md#基础类型数据ref)
+  - [坑：不用name.value用name](./drafts/0502ref，reactive响应式引用的用法和原理.md#坑不用namevalue用name)
+  - [非基础类型数据reactive](./drafts/0502ref，reactive响应式引用的用法和原理.md#非基础类型数据reactive)
+  - [只读readonly](./drafts/0502ref，reactive响应式引用的用法和原理.md#只读readonly)
+  - [解构toRefs](./drafts/0502ref，reactive响应式引用的用法和原理.md#解构torefs)
