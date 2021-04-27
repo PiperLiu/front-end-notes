@@ -2,6 +2,12 @@
 
 <!-- @import "[TOC]" {cmd="toc" depthFrom=1 depthTo=6 orderedList=false} -->
 
+<!-- code_chunk_output -->
+
+- [实例：用Composition-API开发to-do-list](#实例用composition-api开发to-do-list)
+
+<!-- /code_chunk_output -->
+
 ```html
 <!DOCTYPE html>
 <html lang="en">

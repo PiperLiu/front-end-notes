@@ -41,6 +41,8 @@
     - [01Setup函数的使用](#01setup函数的使用)
     - [02ref，reactive响应式引用的用法和原理](#02refreactive响应式引用的用法和原理)
     - [03toRef以及context参数](#03toref以及context参数)
+    - [04实例：用Composition-API开发to-do-list](#04实例用composition-api开发to-do-list)
+    - [05computed方法生成计算属性](#05computed方法生成计算属性)
 
 <!-- /code_chunk_output -->
 
@@ -323,3 +325,11 @@ Vue3 新特性。
 把数据和数据操作摘出来，封装成小的函数，并不完全放在 setup 里。
 
 [./drafts/0504实例：用Composition-API开发to-do-list.md](./drafts/0504实例：用Composition-API开发to-do-list.md)
+
+### 05computed方法生成计算属性
+[./drafts/0505computed方法生成计算属性.md](./drafts/0505computed方法生成计算属性.md)
+
+- [computed](./drafts/0505computed方法生成计算属性.md#computed)
+- [set和get方法](./drafts/0505computed方法生成计算属性.md#set和get方法)
+  - [set的param](./drafts/0505computed方法生成计算属性.md#set的param)
+  - [实例：一个对象](./drafts/0505computed方法生成计算属性.md#实例一个对象)
