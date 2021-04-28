@@ -48,6 +48,7 @@
     - [08Provide、Inject、模板ref用法](#08provide-inject-模板ref用法)
 - [06Vue项目开发配套工具讲解](#06vue项目开发配套工具讲解)
     - [01VueCli的使用和单文件组件](#01vuecli的使用和单文件组件)
+    - [02Vue-Router路由的理解和使用](#02vue-router路由的理解和使用)
 
 <!-- /code_chunk_output -->
 
@@ -383,3 +384,11 @@ Vue3 新特性。
   - [vue create](./drafts/0601VueCli的使用和单文件组件.md#vue-create)
   - [npm install](./drafts/0601VueCli的使用和单文件组件.md#npm-install)
 - [实例：to-do-list](./drafts/0601VueCli的使用和单文件组件.md#实例to-do-list)
+
+### 02Vue-Router路由的理解和使用
+[./drafts/0602Vue-Router路由的理解和使用.md](./drafts/0602Vue-Router路由的理解和使用.md)
+- [创建项目时，记得选择路由Router](./drafts/0602Vue-Router路由的理解和使用.md#创建项目时记得选择路由router)
+- [main.js多了路由插件](./drafts/0602Vue-Router路由的理解和使用.md#mainjs多了路由插件)
+- [router-link](./drafts/0602Vue-Router路由的理解和使用.md#router-link)
+- [router-view](./drafts/0602Vue-Router路由的理解和使用.md#router-view)
+- [懒加载](./drafts/0602Vue-Router路由的理解和使用.md#router-view#懒加载)
