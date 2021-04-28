@@ -408,3 +408,4 @@ Vue3 新特性。
 - [CompositionAPI中如何使用VueX](./drafts/0603VueX的语法详解.md#compositionapi中如何使用vuex)
 
 ### 04使用axios发送ajax请求
+[./drafts/0604使用axios发送ajax请求.md](./drafts/0604使用axios发送ajax请求.md)
