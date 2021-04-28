@@ -50,6 +50,7 @@
     - [01VueCli的使用和单文件组件](#01vuecli的使用和单文件组件)
     - [02Vue-Router路由的理解和使用](#02vue-router路由的理解和使用)
     - [03VueX的语法详解](#03vuex的语法详解)
+    - [04使用axios发送ajax请求](#04使用axios发送ajax请求)
 
 <!-- /code_chunk_output -->
 
@@ -406,3 +407,4 @@ Vue3 新特性。
   - [mutation只能写同步，不能写异步](./drafts/0603VueX的语法详解.md#mutation只能写同步不能写./drafts/0603VueX的语法详解.md异步)
 - [CompositionAPI中如何使用VueX](./drafts/0603VueX的语法详解.md#compositionapi中如何使用vuex)
 
+### 04使用axios发送ajax请求
