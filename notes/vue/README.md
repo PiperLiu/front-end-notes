@@ -49,6 +49,7 @@
 - [06Vue项目开发配套工具讲解](#06vue项目开发配套工具讲解)
     - [01VueCli的使用和单文件组件](#01vuecli的使用和单文件组件)
     - [02Vue-Router路由的理解和使用](#02vue-router路由的理解和使用)
+    - [03VueX的语法详解](#03vuex的语法详解)
 
 <!-- /code_chunk_output -->
 
@@ -392,3 +393,16 @@ Vue3 新特性。
 - [router-link](./drafts/0602Vue-Router路由的理解和使用.md#router-link)
 - [router-view](./drafts/0602Vue-Router路由的理解和使用.md#router-view)
 - [懒加载](./drafts/0602Vue-Router路由的理解和使用.md#router-view#懒加载)
+
+### 03VueX的语法详解
+[./drafts/0603VueX的语法详解.md](./drafts/0603VueX的语法详解.md)
+
+- [创建工程时选择VueX](./drafts/0603VueX的语法详解.md#创建工程时选择vuex)
+- [VueX提供了`./store`](./drafts/0603VueX的语法详解.md#vuex提供了store)
+- [VueX数据管理框架](./drafts/0603VueX的语法详解.md#vuex数据管理框架)
+- [如何在组件里获取](./drafts/0603VueX的语法详解.md#如何在组件里获取)
+- [如何修改数据](./drafts/0603VueX的语法详解.md#如何修改数据)
+- [异步情况](./drafts/0603VueX的语法详解.md#异步情况)
+  - [mutation只能写同步，不能写异步](./drafts/0603VueX的语法详解.md#mutation只能写同步不能写./drafts/0603VueX的语法详解.md异步)
+- [CompositionAPI中如何使用VueX](./drafts/0603VueX的语法详解.md#compositionapi中如何使用vuex)
+
