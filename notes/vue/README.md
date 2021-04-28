@@ -46,6 +46,8 @@
     - [06watch以及其与watchEffect的差异性](#06watch以及其与watcheffect的差异性)
     - [07生命周期函数的新写法](#07生命周期函数的新写法)
     - [08Provide、Inject、模板ref用法](#08provide-inject-模板ref用法)
+- [06Vue项目开发配套工具讲解](#06vue项目开发配套工具讲解)
+    - [01VueCli的使用和单文件组件](#01vuecli的使用和单文件组件)
 
 <!-- /code_chunk_output -->
 
@@ -367,3 +369,17 @@ Vue3 新特性。
   - [更好地应用单向数据流](./drafts/0508Provide、Inject、模板ref用法.md#更好地应用单向数据流)
   - [应用readonly更加安全](./drafts/0508Provide、Inject、模板ref用法.md#应用readonly更加安全)
 - [模板ref用法](./drafts/0508Provide、Inject、模板ref用法.md#模板ref用法)
+
+# 06Vue项目开发配套工具讲解
+
+### 01VueCli的使用和单文件组件
+[./drafts/0601VueCli的使用和单文件组件.md](./drafts/0601VueCli的使用和单文件组件.md)
+
+- [下载nodejs](./drafts/0601VueCli的使用和单文件组件.md#下载nodejs)
+  - [安装nrm](./drafts/0601VueCli的使用和单文件组件.md#安装nrm)
+  - [确认没有安装老版本cli](./drafts/0601VueCli的使用和单文件组件.md#确认没有安装老版本cli)
+  - [安装4.5.9](./drafts/0601VueCli的使用和单文件组件.md#安装459)
+- [创建项目](./drafts/0601VueCli的使用和单文件组件.md#创建项目)
+  - [vue create](./drafts/0601VueCli的使用和单文件组件.md#vue-create)
+  - [npm install](./drafts/0601VueCli的使用和单文件组件.md#npm-install)
+- [实例：to-do-list](./drafts/0601VueCli的使用和单文件组件.md#实例to-do-list)
