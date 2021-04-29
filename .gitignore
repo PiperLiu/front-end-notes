@@ -6,3 +6,6 @@ practice
 
 # .vscode
 **/.vscode
+
+# some files are not able to git well
+'./courses/code-for-project/07-01.VueCLI 的使用和单文件组件/'
