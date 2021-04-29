@@ -13,4 +13,4 @@
 - 项目开始学习日期：2021年4月29日
 - 项目结束学习日期：
 - 笔记地址：[../notes/vue/drafts/0701京东到家.md](../notes/vue/drafts/0701京东到家.md)
-- 项目地址：
+- 项目地址：[./jingdong](./jingdong)
