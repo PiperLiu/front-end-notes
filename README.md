@@ -14,6 +14,8 @@
 
 ## 项目结构介绍
 - 我学过的课程在 [./courses/README.md](./courses/README.md)
+- 我的笔记在 [./notes/README.md](./notes/README.md)
+- 我的前端练手项目在 [./projects/README.md](./projects/README.md)
 
 ## 笔记索引
 ### vue3
