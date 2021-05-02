@@ -1,5 +1,6 @@
 import { createRouter, createWebHashHistory } from 'vue-router'
 import Home from '../views/home/Home.vue'
+import Register from '../views/register/Register.vue'
 import Login from '../views/login/Login.vue'
 
 const routes = [
@@ -9,38 +10,23 @@ const routes = [
     component: Home
   },
   {
+    path: '/register',
+    name: 'Register',
+    component: Register,
+    beforeEnter (to, from, next) {
+      const { isLogin } = localStorage
+      isLogin ? next({ name: 'Home' }) : next()
+    }
+  },
+  {
     path: '/login',
     name: 'Login',
     component: Login,
     beforeEnter (to, from, next) {
-      // console.log(to, from)
-      // {fullPath: "/", hash: "", query: {…}, name: "Home", path: "/",…}
-      // {fullPath: "/login", hash: "", query: {…}, name: "Login", path: "/login",…}
-      // next()  // 调用 next 逻辑才会继续执行
-      // const isLogin = localStorage.isLogin
-      // if (isLogin) {
-      //   next({ name: 'Home' })
-      // } else {
-      //   next()
-      // }
-      // 上面的代码可以精简
       const { isLogin } = localStorage
       isLogin ? next({ name: 'Home' }) : next()
     }
   }
-  // {
-  //   path: '/',
-  //   name: 'Home',
-  //   component: Home
-  // },
-  // {
-  //   path: '/about',
-  //   name: 'About',
-  //   // route level code-splitting
-  //   // this generates a separate chunk (about.[hash].js) for this route
-  //   // which is lazy-loaded when the route is visited.
-  //   component: () => import(/* webpackChunkName: "about" */ '../views/About.vue')
-  // }
 ]
 
 const router = createRouter({
@@ -58,9 +44,10 @@ router.beforeEach((to, from, next) => {
   // }
   // console.log(to, from)
   // 上面的代码可以精简
-  const { isLogin } = localStorage;
-  (isLogin || to.name === 'Login') ? next() : next({ name: 'Login' })
-  next()
+  const { isLogin } = localStorage
+  const { name } = to
+  const isLoginOrRegister = (name === 'Login' || name === 'Register');
+  (isLogin || isLoginOrRegister) ? next() : next({ name: 'Login' })
 })
 
 export default router

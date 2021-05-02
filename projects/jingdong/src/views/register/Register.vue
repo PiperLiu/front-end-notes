@@ -2,57 +2,37 @@
   <div class="wrapper">
     <img src="http://www.dell-lee.com/imgs/vue3/user.png" alt="" class="wrapper__img">
     <div class="wrapper__input">
-      <input
-        class="wrapper__input__content"
-        placeholder="请输入用户名"
-        v-model="data.username"
-      >
+      <input class="wrapper__input__content" placeholder="请输入手机号">
     </div>
     <div class="wrapper__input">
       <input
         class="wrapper__input__content"
         placeholder="请输入密码"
         type="password"
-        v-model="data.password"
       >
     </div>
-    <div class="wrapper__login-button" @click="handleLogin">登录</div>
-    <div class="wrapper__login-link" @click="handleRegisterClick">立即注册</div>
+    <div class="wrapper__input">
+      <input
+        class="wrapper__input__content"
+        placeholder="确认密码"
+        type="password"
+      >
+    </div>
+    <div class="wrapper__register-button">注册</div>
+    <div class="wrapper__register-link" @click="handleLoginCLick">已有账号去登陆</div>
   </div>
 </template>
 
 <script>
 import { useRouter } from 'vue-router'
-import axios from 'axios'
-import { reactive } from 'vue'
-
-axios.defaults.headers.post['Content-Type'] = 'application/json'
-
 export default {
   name: 'Login',
   setup () {
-    const data = reactive({
-      username: '',
-      password: ''
-    })
     const router = useRouter()
-    const handleLogin = () => {
-      // 下面的内容根据 fastmock 文档
-      axios.post('https://www.fastmock.site/mock/ae8e9031947a302fed5f92425995aa19/jd/api/user/login', {
-        username: data.username,
-        pastword: data.password
-      }).then(() => {
-        localStorage.isLogin = true
-        router.push({ name: 'Home' })
-        alert('发送成功')
-      }).catch(() => {
-        alert('发送失败')
-      })
+    const handleLoginCLick = () => {
+      router.push({ name: 'Login' })
     }
-    const handleRegisterClick = () => {
-      router.push({ name: 'Register' })
-    }
-    return { handleLogin, handleRegisterClick, data }
+    return { handleLoginCLick }
   }
 }
 </script>
@@ -91,7 +71,7 @@ export default {
       }
     }
   }
-  &__login-button {
+  &__register-button {
     margin: .32rem .4rem .16rem .4rem;
     line-height: .48rem;
     background: #0091FF;
@@ -101,7 +81,7 @@ export default {
     font-size: .16rem;
     text-align: center;
   }
-  &__login-link {
+  &__register-link {
     text-align: center;
     font-size: .14rem;
     color: $content-notice-fontcolor;
