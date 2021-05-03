@@ -48,7 +48,7 @@ const useRegisterEffect = (showToast) => {
         pastword: data.password
       })
       // console.log(result)
-      if (result?.data?.errno === 0) {
+      if (result?.errno === 0) {
         localStorage.isLogin = true
         router.push({ name: 'Login' })
       } else {
@@ -129,10 +129,10 @@ export default {
   &__register-button {
     margin: .32rem .4rem .16rem .4rem;
     line-height: .48rem;
-    background: #0091FF;
+    background: $btn-bgColor;
     box-shadow: 0 .04rem .08rem 0 rgba(0, 145, 255, 0.32);
     border-radius: .04rem;
-    color: #fff;
+    color: $bgColor;
     font-size: .16rem;
     text-align: center;
   }
