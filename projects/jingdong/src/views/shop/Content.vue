@@ -34,8 +34,8 @@
             "
             >-</span
           >
-          {{ cartList?.[shopId]?.productList?.[item._id]?.count || 0 }}
-          <!-- 从购物车里取 count 值才安全 -->
+          <!-- 不要在 dom 中有过长的逻辑，因此封装 -->
+          {{ getProductCartCount(shopId, item._id) }}
           <span
             class="product__number__plus"
             @click="
@@ -104,7 +104,10 @@ const useCartEffect = () => {
     changeCartItemInfo(shopId, productId, item, num)
     changeShopName(shopId, shopName)
   }
-  return { cartList, changeCartItem }
+  const getProductCartCount = (shopId, productId) => {
+    return cartList?.[shopId]?.productList?.[productId]?.count || 0
+  }
+  return { cartList, changeCartItem, getProductCartCount }
 }
 
 export default {
@@ -115,7 +118,7 @@ export default {
     const shopId = route.params.id
     const { currentTab, handleTabClick } = useTabEffect()
     const { list } = useCurrentListEffect(currentTab, shopId)
-    const { cartList, changeCartItem } = useCartEffect()
+    const { cartList, changeCartItem, getProductCartCount } = useCartEffect()
     return {
       list,
       categories,
@@ -123,6 +126,7 @@ export default {
       handleTabClick,
       shopId,
       changeCartItem,
+      getProductCartCount,
       cartList
     }
   }
