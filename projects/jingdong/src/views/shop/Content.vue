@@ -2,42 +2,49 @@
   <div class="content">
     <div class="category">
       <div
-        :class="{category__item: true, 'category__item--active': currentTab === item.tab }"
+        :class="{
+          category__item: true,
+          'category__item--active': currentTab === item.tab,
+        }"
         v-for="item in categories"
         :key="item.name"
         @click="() => handleTabClick(item.tab)"
       >
-        {{item.name}}
+        {{ item.name }}
       </div>
     </div>
     <div class="product">
-      <div
-        class="product__item"
-        v-for="(item, index) in list"
-        :key="index"
-      >
-        <img
-          :src="item.imgUrl"
-          class="product__item__img"
-        />
+      <div class="product__item" v-for="(item, index) in list" :key="index">
+        <img :src="item.imgUrl" class="product__item__img" />
         <div class="product__item__detail">
-          <h4 class="product__item__title">{{item.name}}</h4>
-          <p class="product__item__sales">月售 {{item.sales}} 件</p>
+          <h4 class="product__item__title">{{ item.name }}</h4>
+          <p class="product__item__sales">月售 {{ item.sales }} 件</p>
           <p class="product__item__price">
-            <span class="product__item__yen">&yen;</span>{{item.price}}
-            <span class="product__item__origin">&yen;{{item.oldPrice}}</span>
+            <span class="product__item__yen">&yen;</span>{{ item.price }}
+            <span class="product__item__origin">&yen;{{ item.oldPrice }}</span>
           </p>
         </div>
         <div class="product__number">
           <span
             class="product__number__minus"
-            @click="() => { changeCartItemInfo(shopId, item._id, item, -1) }"
-          >-</span>
-          {{cartList?.[shopId]?.[item._id]?.count || 0}}  <!-- 从购物车里取 count 值才安全 -->
+            @click="
+              () => {
+                changeCartItem(shopId, item._id, item, -1, shopName);
+              }
+            "
+            >-</span
+          >
+          {{ cartList?.[shopId]?.productList?.[item._id]?.count || 0 }}
+          <!-- 从购物车里取 count 值才安全 -->
           <span
             class="product__number__plus"
-            @click="() => { changeCartItemInfo(shopId, item._id, item, 1) }"
-          >+</span>
+            @click="
+              () => {
+                changeCartItem(shopId, item._id, item, 1, shopName);
+              }
+            "
+            >+</span
+          >
         </div>
       </div>
     </div>
@@ -47,6 +54,7 @@
 <script>
 import { reactive, toRefs, ref, watchEffect } from 'vue'
 import { useRoute } from 'vue-router'
+import { useStore } from 'vuex'
 import { get } from '../../utils/request'
 import { useCommonCartEffect } from './commonCartEffect'
 
@@ -78,22 +86,45 @@ const useCurrentListEffect = (currentTab, shopId) => {
     }
   }
 
-  watchEffect(() => { getContentData() })
+  watchEffect(() => {
+    getContentData()
+  })
 
   const { list } = toRefs(content)
   return { list }
 }
 
+const useCartEffect = () => {
+  const store = useStore()
+  const { cartList, changeCartItemInfo } = useCommonCartEffect()
+  const changeShopName = (shopId, shopName) => {
+    store.commit('changeShopName', shopId, shopName)
+  }
+  const changeCartItem = (shopId, productId, item, num, shopName) => {
+    changeCartItemInfo(shopId, productId, item, num)
+    changeShopName(shopId, shopName)
+  }
+  return { cartList, changeCartItem }
+}
+
 export default {
   name: 'Content',
+  props: ['shopName'],
   setup () {
     const route = useRoute()
     const shopId = route.params.id
     const { currentTab, handleTabClick } = useTabEffect()
     const { list } = useCurrentListEffect(currentTab, shopId)
-    const { changeCartItemInfo, cartList } = useCommonCartEffect()
-
-    return { list, categories, currentTab, handleTabClick, shopId, changeCartItemInfo, cartList }
+    const { cartList, changeCartItem } = useCartEffect()
+    return {
+      list,
+      categories,
+      currentTab,
+      handleTabClick,
+      shopId,
+      changeCartItem,
+      cartList
+    }
   }
 }
 </script>
@@ -130,69 +161,69 @@ export default {
   &__item {
     position: relative;
     display: flex;
-    padding: .12rem 0;
-    margin: 0 .16rem;
-    border-bottom: .01rem solid $content-bgColor;
+    padding: 0.12rem 0;
+    margin: 0 0.16rem;
+    border-bottom: 0.01rem solid $content-bgColor;
     &__detail {
       overflow: hidden;
     }
     &__img {
       width: 0.68rem;
       height: 0.68rem;
-      margin-right: .16rem;
+      margin-right: 0.16rem;
     }
     &__title {
       margin: 0;
-      line-height: .2rem;
-      font-size: .14rem;
+      line-height: 0.2rem;
+      font-size: 0.14rem;
       color: $content-fontcolor;
       @include ellipse;
     }
     &__sales {
-      margin: .06rem 0;
-      line-height: .16rem;
-      font-size: .12rem;
+      margin: 0.06rem 0;
+      line-height: 0.16rem;
+      font-size: 0.12rem;
       color: $content-fontcolor;
     }
     &__price {
       margin: 0;
-      line-height: .2rem;
-      font-size: .12rem;
+      line-height: 0.2rem;
+      font-size: 0.12rem;
       color: $highlight-fontColor;
     }
     &__yen {
-      font-size: .12rem;
+      font-size: 0.12rem;
     }
     &__origin {
-      line-height: .2rem;
-      font-size: .12rem;
+      line-height: 0.2rem;
+      font-size: 0.12rem;
       color: $light-fontColor;
       text-decoration: line-through;
     }
     .product__number {
       position: absolute;
       right: 0;
-      bottom: .12rem;
+      bottom: 0.12rem;
       border-radius: 50%;
       &__minus,
       &__plus {
         display: inline-block;
-        width: .2rem;
-        height: .2rem;
-        line-height: .16rem;
+        width: 0.2rem;
+        height: 0.2rem;
+        line-height: 0.16rem;
         border-radius: 50%;
-        font-size: .2rem;
+        font-size: 0.2rem;
         text-align: center;
       }
       &__minus {
-        border: .01rem solid $medium-fontColor;
+        border: 0.01rem solid $medium-fontColor;
         color: $medium-fontColor;
-        margin-right: .05rem;
+        margin-right: 0.05rem;
       }
       &__plus {
         background: $btn-bgColor;
         color: $bgColor;
-        margin-left: .05rem;
+        margin-left: 0.05rem;
       }
     }
   }
