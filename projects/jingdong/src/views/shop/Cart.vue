@@ -1,5 +1,5 @@
 <template>
-  <div class="mask" v-if="showCart"></div>
+  <div class="mask" @click="handleCartShowChange" v-if="showCart" />
   <div class="cart">
     <div class="product" v-if="showCart">
       <div class="product__header">
@@ -13,11 +13,13 @@
           ></span>
           全选
         </div>
-        <div
-          class="product__header__clear"
-          @click="() => cleanCartProducts(shopId)"
-        >
-          清空购物车
+        <div class="product__header__clear">
+          <span
+            class="product__header__clear__btn"
+            @click="() => cleanCartProducts(shopId)"
+          >
+            清空购物车
+          </span>
         </div>
       </div>
       <template v-for="(item, index) in productList" :key="index">
@@ -73,7 +75,11 @@
       <div class="check__info">
         总计：<span class="check__info__price">&yen; {{ price }} </span>
       </div>
-      <div class="check__btn">去结算</div>
+      <div class="check__btn">
+        <router-link :to="{name: 'Home'}">
+          去结算
+        </router-link>
+      </div>
     </div>
   </div>
 </template>
@@ -158,15 +164,21 @@ const useCartEffect = (shopId) => {
   }
 }
 
+// 展示隐藏购物车逻辑
+const toggleCartEffect = () => {
+  const showCart = ref(false)
+  const handleCartShowChange = () => {
+    showCart.value = !showCart.value
+  }
+  return { showCart, handleCartShowChange }
+}
+
 export default {
   name: 'Cart',
   setup () {
     const route = useRoute()
     const shopId = route.params.id
-    const showCart = ref(false)
-    const handleCartShowChange = () => {
-      showCart.value = !showCart.value
-    }
+    const { showCart, handleCartShowChange } = toggleCartEffect()
     const {
       total,
       price,
@@ -203,7 +215,7 @@ export default {
   right: 0;
   bottom: 0;
   top: 0;
-  background: rgba(0, 0, 0, .5);
+  background: rgba(0, 0, 0, 0.5);
   z-index: 1;
 }
 .cart {
@@ -212,31 +224,36 @@ export default {
   right: 0;
   bottom: 0;
   z-index: 2;
-  background: #fff;
+  background: $bgColor;
 }
 .product {
   overflow-y: scroll;
   flex: 1;
-  background: #fff;
+  background: $bgColor;
   &__header {
     display: flex;
     line-height: 0.52rem;
-    border-bottom: 1px solid #f1f1f1;
+    border-bottom: 1px solid $content-bgColor;
     font-size: 0.14rem;
-    color: #333;
+    color: $content-fontcolor;
     &__all {
       width: 0.64rem;
-      margin-left: .18rem;
+      margin-left: 0.18rem;
     }
     &__icon {
       display: inline-block;
-      color: #0091ff;
-      font-size: .2rem;
+      vertical-align: top;
+      color: $btn-bgColor;
+      font-size: 0.2rem;
     }
     &__clear {
       flex: 1;
       margin-right: 0.16rem;
       text-align: right;
+      &__btn {
+        // 把清空购物车的高度撑起来
+        display: inline-block;
+      }
     }
   }
   &__item {
@@ -248,7 +265,7 @@ export default {
     &__checked {
       line-height: 0.5rem;
       margin-right: 0.13rem;
-      color: #0091ff;
+      color: $btn-bgColor;
       font-size: 0.2rem;
     }
     &__detail {
@@ -284,7 +301,7 @@ export default {
     .product__number {
       position: absolute;
       right: 0;
-      bottom: 0.12rem;
+      bottom: 0.3rem;
       border-radius: 50%;
       &__minus,
       &__plus {
@@ -336,14 +353,14 @@ export default {
       border-radius: 0.1rem;
       font-size: 0.12rem;
       text-align: center;
-      color: #fff;
+      color: $bgColor;
       transform: scale(0.5);
       transform-origin: left center;
     }
   }
   &__info {
     flex: 1;
-    color: #333;
+    color: $content-fontcolor;
     font-size: 0.12rem;
     &__price {
       color: $highlight-fontColor;
@@ -355,8 +372,12 @@ export default {
     line-height: 0.49rem;
     background-color: #4fb0f9;
     text-align: center;
-    color: #fff;
+    color: $bgColor;
     font-size: 0.14rem;
+    a {
+      color: $bgColor;
+      text-decoration: none;
+    }
   }
 }
 </style>

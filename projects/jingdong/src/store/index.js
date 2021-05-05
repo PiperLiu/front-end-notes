@@ -3,13 +3,21 @@ import { createStore } from 'vuex'
 export default createStore({
   state: {
     cartList: {
+      // shopId: {
+      //   shopName: '',
+      //   productList: {
+      //     productId: {
+      //       _id: '1'
+      //       ...
+      //     }
+      //   }
+      // }
     }
   },
   mutations: {
     changeCartItemInfo (state, payload) {
       const { shopId, productId, productInfo } = payload
-      let shopInfo = state.cartList[shopId]
-      if (!shopInfo) { shopInfo = {} }
+      const shopInfo = state.cartList[shopId] || {}
       let product = shopInfo[productId]
       if (!product) {
         product = productInfo
