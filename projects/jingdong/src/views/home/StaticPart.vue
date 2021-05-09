@@ -77,7 +77,7 @@ export default {
   margin-bottom: 0.12rem;
   line-height: 0.32rem;
   background: $search-bgColor;
-  color: $search-fontolor;
+  color: $search-fontcolor;
   border-radius: 0.16rem;
   .iconfont {
     position: relative;

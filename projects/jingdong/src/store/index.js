@@ -1,4 +1,4 @@
-import { createStore } from 'vuex'
+import Vuex from 'vuex'
 
 const setLocalCartList = (state) => {
   const { cartList } = state
@@ -7,26 +7,31 @@ const setLocalCartList = (state) => {
 }
 
 const getLocalCartList = () => {
-  // 这里应该写成文档：{ shopId: {shopName: '', productList: { productId: {} } } }
-  return JSON.parse(localStorage.cartList) || {}
+  // { shopId: {shopName:'', productList:{ productId: {} }}}
+  try {
+    return JSON.parse(localStorage.cartList)
+  } catch (e) {
+    return {}
+  }
 }
 
-export default createStore({
+export default Vuex.createStore({
   state: {
-    cartList: getLocalCartList()
+    cartList: getLocalCartList(),
+    addressList: []
   },
   mutations: {
     changeCartItemInfo (state, payload) {
-      const { shopId, productId, productInfo, num } = payload
+      const { shopId, productId, productInfo } = payload
       const shopInfo = state.cartList[shopId] || {
         shopName: '', productList: {}
       }
       let product = shopInfo.productList[productId]
       if (!product) {
+        productInfo.count = 0
         product = productInfo
-        product.count = 0
       }
-      product.count += num
+      product.count = product.count + payload.num
       if (payload.num > 0) { product.check = true }
       if (product.count < 0) { product.count = 0 }
       shopInfo.productList[productId] = product
@@ -63,10 +68,12 @@ export default createStore({
         }
       }
       setLocalCartList(state)
+    },
+    clearCartData (state, shopId) {
+      state.cartList[shopId].productList = {}
+    },
+    changeAddressList (state, addressList) {
+      state.addressList.splice(0, state.addressList.length, ...addressList)
     }
-  },
-  actions: {
-  },
-  modules: {
   }
 })

@@ -88,7 +88,7 @@ export default {
     &__icon {
       width: .44rem;
       text-align: center;
-      color: $search-fontolor;
+      color: $search-fontcolor;
     }
     &__input {
       display: block;
