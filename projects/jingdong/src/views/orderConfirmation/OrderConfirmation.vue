@@ -17,50 +17,27 @@
         <div class="iconfont top__receiver__icon">&#xe677;</div>
       </div>
     </div>
-    <!-- 这里开始修改 课上到 12-3 1:50秒 -->
     <div class="products">
       <div class="products__title">
-        <div class="products__list">
-          <div class="product">
-            <div
-              class="product__item"
-              v-for="(item, index) in list"
-              :key="index"
-            >
-              <img :src="item.imgUrl" class="product__item__img" />
-              <div class="product__item__detail">
-                <h4 class="product__item__title">{{ item.name }}</h4>
-                <p class="product__item__sales">月售 {{ item.sales }} 件</p>
-                <p class="product__item__price">
-                  <span class="product__item__yen">&yen;</span>{{ item.price }}
-                  <span class="product__item__origin"
-                    >&yen;{{ item.oldPrice }}</span
-                  >
-                </p>
-              </div>
-              <div class="product__number">
-                <span
-                  class="product__number__minus"
-                  @click="
-                    () => {
-                      changeCartItem(shopId, item._id, item, -1, shopName);
-                    }
-                  "
-                  >-</span
-                >
-                <!-- 不要在 dom 中有过长的逻辑，因此封装 -->
-                {{ getProductCartCount(shopId, item._id) }}
-                <span
-                  class="product__number__plus"
-                  @click="
-                    () => {
-                      changeCartItem(shopId, item._id, item, 1, shopName);
-                    }
-                  "
-                  >+</span
-                >
-              </div>
-            </div>
+        {{ shopName }} 这里 shopName 为空，因为在 Shop.vue 里传不进来
+        <div
+          class="products__item"
+          v-for="item in productList"
+          :key="item._id"
+        >
+          <img :src="item.imgUrl" class="products__item__img" />
+          <div class="products__item__detail">
+            <h4 class="products__item__title">{{ item.name }}</h4>
+            <p class="products__item__price">
+              <span>
+                <span class="products__item__yen">&yen;</span>
+                {{ item.price }} × {{ item.count }}
+              </span>
+              <span class="products__item__total">
+                <span class="products__item__yen">&yen;</span>
+                {{ item.price * item.count }}
+              </span>
+            </p>
           </div>
         </div>
       </div>
@@ -69,12 +46,22 @@
 </template>
 
 <script>
+import { useRoute } from 'vue-router'
+import { useCommonCartEffect } from '../../effects/cartEffects'
 export default {
-  name: 'OrderConfirmation'
+  name: 'OrderConfirmation',
+  setup () {
+    const route = useRoute()
+    const shopId = route.params.id
+    const { productList, shopName } = useCommonCartEffect(shopId)
+    return { productList, shopName }
+  }
 }
 </script>
 
 <style lang="scss" scoped>
+@import "../../style/variables.scss";
+@import "../../style/mixins.scss";
 .wrapper {
   position: absolute;
   left: 0;
@@ -135,6 +122,55 @@ export default {
       top: 0.5rem;
       color: #666;
       font-size: 0.16rem;
+    }
+  }
+}
+.products {
+  margin: 0.16rem 0.18rem 0.55rem 0.18rem;
+  &__title {
+    padding: .16rem .16rem 0 .16rem;
+    font-size: .16rem;
+    color: #333;
+  }
+  &__item {
+    position: relative;
+    display: flex;
+    padding: 0.16rem;
+    &__img {
+      width: 0.46rem;
+      height: 0.46rem;
+      margin-right: 0.16rem;
+    }
+    &__detail {
+      flex: 1;
+    }
+    &__title {
+      margin: 0;
+      line-height: 0.2rem;
+      font-size: 0.14rem;
+      color: $content-fontcolor;
+      @include ellipse;
+    }
+    &__price {
+      display: flex;
+      margin: 0.06rem 0 0 0;
+      line-height: 0.2rem;
+      font-size: 0.12rem;
+      color: $highlight-fontColor;
+    }
+    &__total {
+      flex: 1;
+      text-align: right;
+      color: #000;
+    }
+    &__yen {
+      font-size: 0.12rem;
+    }
+    &__origin {
+      line-height: 0.2rem;
+      font-size: 0.12rem;
+      color: $light-fontColor;
+      text-decoration: line-through;
     }
   }
 }

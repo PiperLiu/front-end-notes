@@ -38,6 +38,10 @@ const useShopInfoEffect = () => {
     }
   }
   const { item } = toRefs(data)
+  // 这里存在一个错误需要解决
+  // console.log(item.value) // ObjectRefImpl{_object: Proxy, _key: "item", __v_isRef: true}
+  // console.log(item.value) // Proxy{}
+  // console.log(item.value.name) // undefined
   return { item, getItemdata }
 }
 
