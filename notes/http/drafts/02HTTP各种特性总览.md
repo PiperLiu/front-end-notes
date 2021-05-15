@@ -14,6 +14,14 @@
       - [默认允许的Content-Type只有三个](#默认允许的content-type只有三个)
       - [官方文档：fetch.spec.whatwg.org](#官方文档fetchspecwhatwgorg)
       - [设置Access-Control-Allow-?](#设置access-control-allow-)
+    - [缓存Cache-Control](#缓存cache-control)
+      - [设置Cache-Control](#设置cache-control)
+      - [如果max-age过大怎么办？](#如果max-age过大怎么办)
+      - [Cache-Control参数的值用逗号分割](#cache-control参数的值用逗号分割)
+    - [缓存验证](#缓存验证)
+      - [Last-Modified](#last-modified)
+      - [Etag](#etag)
+      - [程序操作缓存验证](#程序操作缓存验证)
 
 <!-- /code_chunk_output -->
 
@@ -149,6 +157,7 @@ jsonp是一个好的解决方案，参考 https://www.cnblogs.com/dowinning/arch
 - 7、为了便于客户端使用数据，逐渐形成了一种非正式传输协议，人们把它称作JSONP，该协议的一个要点就是允许用户传递一个callback参数给服务端，然后服务端返回数据时会将这个callback参数作为函数名来包裹住JSON数据，这样客户端就可以随意定制自己的函数来自动处理返回数据了。
 
 ### CORS预请求
+CORS: Cross-origin resource sharing
 
 现在我们获取 [../codes/跨域/server9999](../codes/跨域/server9999) 发来的 html（[../codes/跨域/test2.html](../codes/跨域/test2.html)），里面的请求是：
 ```js
@@ -208,3 +217,186 @@ http.createServer(function (request, response) {
 注意到我们在 fetch 前，多了一个请求，这个是预请求。
 
 如果我们设置：`'Access-Control-Max-Age': '1000'`，则代表1000内有一次预请求就不需要再有预请求了。所以，当我们第二次访问呢 9998 时，确实没有预请求了。
+
+### 缓存Cache-Control
+可缓存性：
+- public 经过的大家（代理服务器啥的）都可以缓存
+- private 发起请求的服务器才可用缓存
+- no-cache 谁都不可以缓存（可以在本地缓存，但是每次使用都需要在服务器端验证）
+
+到期：
+- `max-age=<seconds>`缓存多久才过期，浏览器才再发请求
+- `s-maxage=<seconds>`代理服务器的`max-age`，如果没设置这个，用`max-age`的值
+- `max-stale=<seconds>`发起请求方主动带的头，即便缓存过期，在`max-stale`内，仍可以使用过期缓存，在浏览器里用不到，一般在发起方用
+
+重新验证：
+- `must-revalidate`过期后，必须验证才知道是否可以接着用本地缓存
+- `proxy-revalidate`缓存过期后，必须验证才知道是否可以接着用本地缓存
+
+其他：
+- `no-store`与`no-cache`不同，这个`no-store`根本就不让本地缓存
+- `no-transform`用在代理服务器那边，不让代理服务器随意改动返回的内容
+
+上述这些头只是限制性、声明性的，但是接收方完全可以不用这个做。
+
+#### 设置Cache-Control
+代码：[../codes/缓存/server.js](../codes/缓存/server.js)
+
+```js
+const http = require('http')
+const fs = require('fs')
+
+http.createServer(function (request, response) {
+  console.log('request come', request.url)
+
+  if (request.url === '/') {
+    const html = fs.readFileSync('test.html', 'utf8')
+    response.writeHead(200, {
+      'Content-Type': 'text/html'
+    })
+    response.end(html)
+  }
+
+  if (request.url === '/script.js') {
+    response.writeHead(200, {
+      'Content-Type': 'text/javascript'
+    })
+    response.end('console.log("script loaded")')
+  }
+
+}).listen(8888)
+
+console.log('server listening on 8888')
+```
+
+代码：[../codes/缓存/test.html](../codes/缓存/test.html)
+```html
+<script src="/script.js"></script>
+```
+
+如上，服务端对请求有判断：
+- 如果我仅仅访问 `8888/` ，则给我 html ，让我去解析渲染
+- 如果我访问 `8888/script.js` ，那给我一段 js ，内容是 `console.log("script loaded")`
+
+我们的 html 会向服务器请求 `/script.js` ，则浏览器会渲染（执行代码，因为类型是 js） `/script.js` 返回的内容。
+
+可以在浏览器的 network 中看到 `script.js` 这条请求，说明请求都是以 **网络传输** 形式进行的。
+
+我们设置：
+```js
+  if (request.url === '/script.js') {
+    response.writeHead(200, {
+      'Content-Type': 'text/javascript',
+      'Cache-Control': 'max-age=20'
+    })
+    response.end('console.log("script loaded")')
+  }
+```
+
+![](./images/20210515缓存.png)
+
+如上，我们有了 `max-age` ，此外，别忘了把 `Disable cache` 取消勾选，否在浏览器不从缓存读取。
+
+我们刷新。
+
+![](./images/20210515缓存2.png)
+
+如上，大小和请求时间都为 0 ，说明我们没有经过网络传输，而是直接读取浏览器。
+
+20s内，我们把返回内容改成：`console.log("huh huh huh")`，然后重启服务，发现浏览器控制台输出的还是 `script loaded` 。这说明我们的 `max-age=20` 生效，我们使用本地的内容，而非重新请求。
+
+#### 如果max-age过大怎么办？
+后端的 max-age 设置过大，前端给客户端更新了应用怎么办？
+
+前端解决方案为：根据打包完成文件与其他静态文件生成哈希码，加到 url 上，因此如果静态文件变了，则 url 变了，需要重新发起请求，从而达到更新缓存的作用。
+
+这也是为什么前端打包完成，要加上一段“奇怪的码”。这也是业界最通用的方案。
+
+#### Cache-Control参数的值用逗号分割
+`'Cache-Control': 'max-age=200, public'`。我还以为是分号呢。
+
+### 缓存验证
+![](./images/20210515缓存验证.png)
+
+如上，缓存验证是一个很重要的步骤。那么如何进行验证？
+
+#### Last-Modified
+
+给资源设置上一次修改时，主要配合`If-Modified-Since`或者`If-Unmodified-Since`使用。
+
+对比上次修改时间，来验证资源是否需要更新。
+
+#### Etag
+
+Etag 用数据签名标记资源。
+
+配合`If-Match`或者`If-Non-Match`使用。
+
+对比资源的签名判断是否使用缓存。
+
+#### 程序操作缓存验证
+```js
+  if (request.url === '/script.js') {
+    response.writeHead(200, {
+      'Content-Type': 'text/javascript',
+      'Cache-Control': 'max-age=200000, no-cache',
+      'Last-Modified': '123',
+      'Etag': '777'
+    })
+    response.end('console.log("script loaded")')
+  }
+```
+
+启动服务，然后刷新两次，如下图。
+
+![](./images/20210515缓存验证2.png)
+
+发现：
+- 刷新后服务器还是会通过网络传输获取 script.js
+- 第二次请求头里，有`If-Modified-Since`和`If-None-Match`
+- 对应服务端的`Last-Modified`和`Etag`
+
+因此，我们可以在服务端进行判断，并进行响应。
+
+```js
+  if (request.url === '/script.js') {
+
+    const etag = request.headers['if-none-match']
+    if (etag === '777') {
+      response.writeHead(304, {
+        'Content-Type': 'text/javascript',
+        'Cache-Control': 'max-age=200000, no-cache',
+        'Last-Modified': '123',
+        'Etag': '777'
+      })
+      response.end('')
+    } else {
+      response.writeHead(200, {
+        'Content-Type': 'text/javascript',
+        'Cache-Control': 'max-age=200000, no-cache',
+        'Last-Modified': '123',
+        'Etag': '777'
+      })
+      response.end('console.log("script loaded")')
+    }
+  }
+```
+
+注意：
+- request.headers 是一个对象
+- 如果命中（`etag === '777'`），返回码变更了，为`304`，且 reponse 内容为空
+
+![](./images/20210515缓存验证3.png)
+
+如上：
+- 我们的状态码是 `304 Not Modified`
+- 并且，还是有“返回的”内容（尽管 reponse 内容为空），这是因为 Chrome 里自动为我们显示命中 **（Chrome 从状态码304得知命中了）** 后，读取的缓存内容，而非服务端返回的内容
+
+如果勾选了 Chrome 的 `Disable Cache` ，则 `Request Headers` 里的头不再带有 `'if-none-match'` 这种缓存相关的内容了
+
+小tips：如何清理浏览器缓存？自定义及控制-更多工具-清理浏览数据。
+
+此外：
+- 上面的实验，如果不用 `no-cache` ，则都不发请求去验证了，直接在本地读
+- 如果 `no-cache` 改为 `no-store` ，则每次都重新请求，不用缓存
+- 这两个实验都需要清理缓存再做
