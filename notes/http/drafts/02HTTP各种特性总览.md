@@ -22,6 +22,12 @@
       - [Last-Modified](#last-modified)
       - [Etag](#etag)
       - [程序操作缓存验证](#程序操作缓存验证)
+    - [Cookie](#cookie)
+      - [代码实例](#代码实例)
+      - [设置domain让二级域名能共享Cookie](#设置domain让二级域名能共享cookie)
+      - [Session不一定要使用Cookie](#session不一定要使用cookie)
+    - [HTTP长连接](#http长连接)
+      - [实验](#实验)
 
 <!-- /code_chunk_output -->
 
@@ -520,3 +526,90 @@ console.log('server listening on 8888')
 
 在网站中，我们常用 Cookie 实现 Session 。比如网站设计中，我们常把用户的 id 保存给 Cookie 。
 
+### HTTP长连接
+
+TCP连接有长连接和短连接之分。
+- 长连接：一定时间内不关闭连接，好处是不用每次请求都重新创建新连接，损耗性能
+- 短连接：用完就断
+
+现在网站大部分都是长连接。
+
+![](./images/20210516长连接.png)
+
+如上，访问百度：
+- 我们在 Network 中调出 `Connection ID` 列（可以右键列头）
+- 看到百度尝试复用连接，但还是创建了多个连接
+- 这是因为 http 1.1 每个连接中请求是串行的，想提高效率（并发），只能创建多个连接；Chrome 允许最大并发 6 个连接
+
+在头里，看到 `Connection: Keep-Alive` ，让浏览器创建长连接，默认就是长连接。还可用设置 `close` 来创建短链接。
+
+在 http2 里，我们可以“信道复用”，串行加载数据。我们访问 Google （2021年5月16日），可以看到只创建了一个连接（同域的）。
+
+#### 实验
+
+在 [../codes/connection](../codes/connection) 里。
+
+```js
+const http = require('http')
+const fs = require('fs')
+
+http.createServer(function (request, response) {
+  console.log('request come', request.url)
+
+  const html = fs.readFileSync('test.html', 'utf8')
+  const img = fs.readFileSync('test.jpg')
+  if (request.url === '/') {
+    response.writeHead(200, {
+      'Content-Type': 'text/html',
+    })
+    response.end(html)
+  } else {
+    response.writeHead(200, {
+      'Content-Type': 'image/jpg',
+      'Connection': 'keep-alive' // or close
+    })
+    response.end(img)
+  }
+
+}).listen(8888)
+
+console.log('server listening on 8888')
+```
+
+```html
+<body>
+  <img src="/test1.jpg" alt="">
+  <img src="/test2.jpg" alt="">
+  <img src="/test3.jpg" alt="">
+  <img src="/test4.jpg" alt="">
+  <img src="/test5.jpg" alt="">
+  <img src="/test6.jpg" alt="">
+  <img src="/test7.jpg" alt="">
+  <img src="/test11.jpg" alt="">
+  <img src="/test12.jpg" alt="">
+  <img src="/test13.jpg" alt="">
+  <img src="/test14.jpg" alt="">
+  <img src="/test15.jpg" alt="">
+  <img src="/test16.jpg" alt="">
+  <img src="/test17.jpg" alt="">
+  <img src="/test111.jpg" alt="">
+  <img src="/test112.jpg" alt="">
+  <img src="/test113.jpg" alt="">
+  <img src="/test114.jpg" alt="">
+  <img src="/test115.jpg" alt="">
+  <img src="/test116.jpg" alt="">
+  <img src="/test117.jpg" alt="">
+</body>
+```
+
+如上，我们去访问网站的非 `/` 资源，我们的服务端会返回 `response.end(img)` 。
+
+此外，别忘了修改为 `Fast 3G` 来模拟网络传输速度。
+
+![](./images/20210516长连接2.png)
+
+可以看到长连接时，我们创建了 6 个连接，并且复用。
+
+![](./images/20210516长连接3.png)
+
+设置短连接 `'Connection': 'close'` ，可以看到创建了更多链接，没有复用。
