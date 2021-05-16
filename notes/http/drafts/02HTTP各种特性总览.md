@@ -400,3 +400,123 @@ Etag 用数据签名标记资源。
 - 上面的实验，如果不用 `no-cache` ，则都不发请求去验证了，直接在本地读
 - 如果 `no-cache` 改为 `no-store` ，则每次都重新请求，不用缓存
 - 这两个实验都需要清理缓存再做
+
+### Cookie
+Cookie 可以通过 `Set-Cookie` 设置，浏览器在保存了 Cookie 后，再进行同域的请求就会带上这个 Cookie ，在访问会话中就会通过 Cookie 传输的内容来保证“是这个用户”。
+
+Cookie 可以用 max-age 和 expires 设置过期时间、 Secure 只在 https 的时候发送， HttpOnly 无法通过 document.cookie 访问。
+
+#### 代码实例
+代码：[../codes/cookie/server.js](../codes/cookie/server.js)
+
+```js
+const http = require('http')
+const fs = require('fs')
+
+http.createServer(function (request, response) {
+  console.log('request come', request.url)
+
+  if (request.url === '/') {
+    const html = fs.readFileSync('test.html', 'utf8')
+    response.writeHead(200, {
+      'Content-Type': 'text/html',
+      'Set-Cookie': 'id=123'
+    })
+    response.end(html)
+  }
+
+}).listen(8888)
+
+console.log('server listening on 8888')
+```
+
+代码：[../codes/cookie/test.html](../codes/cookie/test.html)
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <div>Content</div>
+</body>
+<script>
+  console.log(document.cookie)
+</script>
+</html>
+```
+
+![](./images/20210516Cookie.png)
+
+如上，在 Application 里看 Cookie 。
+
+![](./images/20210516Cookie2.png)
+
+此外，我们浏览器有了 Cookie 后，下次访问也会自动带上 Cookie 。
+
+Cookie 可以作为列表 `[]` 形式。
+
+```js
+response.writeHead(200, {
+  'Content-Type': 'text/html',
+  'Set-Cookie': ['id=123', 'abc=456']
+})
+```
+
+如何设置过期时间呢？如何设置其他参数呢？**用分号分割。**
+
+```js
+response.writeHead(200, {
+  'Content-Type': 'text/html',
+  'Set-Cookie': ['id=123; max-age=10', 'abc=456; HttpOnly']
+})
+```
+
+![](./images/20210516Cookie3.png)
+
+如上，我们收到的服务端的内容，则有两个 Set-Cookie 。
+
+我们给我 `abc=456` 设置了 `HttpOnly` ，导致浏览器控制台只显示 `id=123` ，因为 `HttpOnly` 禁止 js 访问。
+
+#### 设置domain让二级域名能共享Cookie
+
+- 一级域名：test.com
+- 二级域名：a.test.com
+
+我们用 Chrome 插件 HostAdmin 映射域名来做实验。
+
+```js
+const http = require('http')
+const fs = require('fs')
+
+http.createServer(function (request, response) {
+  console.log('request come', request.url)
+
+  const host = request.headers.host
+
+  if (request.url === '/') {
+    const html = fs.readFileSync('test.html', 'utf8')
+    if (host === 'test.com') {
+      response.writeHead(200, {
+        'Content-Type': 'text/html',
+        'Set-Cookie': 'id=123; domain=test.com'
+      })
+    }
+    response.end(html)
+  }
+
+}).listen(8888)
+
+console.log('server listening on 8888')
+```
+
+如上，我们在访问一级域名 （request.headers.host === 'test.com'） 时，让其 Cookie 的 domain 是 `test.com` 。
+
+#### Session不一定要使用Cookie
+
+在网站中，我们常用 Cookie 实现 Session 。比如网站设计中，我们常把用户的 id 保存给 Cookie 。
+
