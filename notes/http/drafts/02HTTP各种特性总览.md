@@ -613,3 +613,103 @@ console.log('server listening on 8888')
 ![](./images/20210516长连接3.png)
 
 设置短连接 `'Connection': 'close'` ，可以看到创建了更多链接，没有复用。
+
+### 数据协商
+
+客户端给服务端做出“数据是什么样的”的请求。
+
+分类：
+- 请求，通过 Accept 来声明
+- 返回，通过 Content 来返回
+
+#### Accept、Accept-Encoding、Accept-Language、User-Agent
+- Accept-Encoding 编码方式，用了什么压缩方式
+- Accept-Language 不同的语言
+- User-Agent 比如告诉服务端是什么机器，移动端、PC端？
+
+#### Content-Type、Content-Encoding和Content-Language
+这是在服务端定义的。
+
+与 Accept 对应，但是没有 User-Agent 。
+
+关于 Content-Type 有一点要说的：`X-Content-Type-Options`让浏览器不要随意预测内容的数据格式。防止被恶意插入脚本。
+
+#### 数据协商实例
+![](./images/20210517数据协商1.png)
+
+![](./images/20210517数据协商2.png)
+如上，上面的数字是实际传输大小（包含头信息等）；下面的是内容（body）大小。
+
+用 node 的 zlib 做实验，代码：[../codes/数据协商/server](../codes/数据协商/server)
+
+```js
+const http = require('http')
+const fs = require('fs')
+const zlib = require('zlib')
+
+http.createServer(function (request, response) {
+  console.log('request come', request.url)
+
+  const html = fs.readFileSync('test.html')
+  response.writeHead(200, {
+    'Content-Type': 'text/html',
+    // 'X-Content-Options': 'nosniff'
+    'Content-Encoding': 'gzip'
+  })
+  response.end(zlib.gzipSync(html))
+}).listen(8888)
+
+console.log('server listening on 8888')
+```
+
+![](./images/20210517数据协商3.png)
+
+可见，body大小，但是传输的大小变小了，因为 gzip 把 body 压缩了。一般来讲，压缩后的总大小小于body大小。
+
+我们再测试一下请求的数据协商。
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+  <form action="/form" id="form" enctype="multipart/form-data">
+    <input type="text" name="name">
+    <input type="password" name="password">
+    <input type="file" name="file">
+    <input type="submit">
+  </form>
+</body>
+</html>
+```
+
+如上，我们定义表单的 `enctype` ，来规定表单发送请求的数据类型。
+
+如果定义为 `multipart/form-data` 则是我们有多种类型（包含文件）。
+
+form 会自动发送请求，但是，如果上传了文件，则在 `Chrome` 中看不到文件请求信息了。我们写 `ajax` 的方式（`script` 中的代码）来查看。
+
+```html
+  <script>
+    var form = document.getElementById('form')
+    form.addEventListener('submit', function (e) {
+      e.preventDefault()
+      var formData = new FormData(form)
+      // 这时不需要主动声明 Content-Type
+      // fetch 自动帮我们做了
+      fetch('/form', {
+        method: 'POST',
+        body: formData
+      })
+    })
+  </script>
+```
+
+![](./images/20210517数据协商4.png)
+
+如上可以看到我们发送的数据。
