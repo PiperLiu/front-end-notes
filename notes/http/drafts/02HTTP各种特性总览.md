@@ -28,6 +28,18 @@
       - [Session不一定要使用Cookie](#session不一定要使用cookie)
     - [HTTP长连接](#http长连接)
       - [实验](#实验)
+    - [数据协商](#数据协商)
+      - [Accept、Accept-Encoding、Accept-Language、User-Agent](#accept-accept-encoding-accept-language-user-agent)
+      - [Content-Type、Content-Encoding和Content-Language](#content-type-content-encoding和content-language)
+      - [数据协商实例](#数据协商实例)
+    - [Redirect](#redirect)
+    - [Content-Security-Policy, CSP](#content-security-policy-csp)
+      - [禁止inline-js防止XSS攻击](#禁止inline-js防止xss攻击)
+      - [只允许加载本域名提供脚本](#只允许加载本域名提供脚本)
+      - [只能跳转本站（用form限制提交范围）](#只能跳转本站用form限制提交范围)
+      - [推荐阅读：mdn.csp](#推荐阅读mdncsp)
+      - [report-uri向服务端汇报内容](#report-uri向服务端汇报内容)
+      - [在html里写在meta里也可](#在html里写在meta里也可)
 
 <!-- /code_chunk_output -->
 
@@ -713,3 +725,91 @@ form 会自动发送请求，但是，如果上传了文件，则在 `Chrome` �
 ![](./images/20210517数据协商4.png)
 
 如上可以看到我们发送的数据。
+
+### Redirect
+我们开发服务器，指定资源位置；之后改变了资源位置，我们会告诉浏览器新的资源位置在哪里。
+
+[../codes/重定向/server](../codes/重定向/server)
+
+```js
+const http = require('http')
+
+http.createServer(function (request, response) {
+  console.log('request come', request.url)
+
+  if (request.url === '/') {
+    response.writeHead(302, {  // or 301
+      'Location': '/new'
+    })
+    response.end()
+  }
+  if (request.url === '/new') {
+    response.writeHead(200, {
+      'Content-Type': 'text/html',
+    })
+    response.end('<div>this is content</div>')
+  }
+}).listen(8888)
+
+console.log('server listening on 8888')
+```
+
+要注意：
+- 只有 `302`（临时跳转）、或者 `301`（永久跳转），才会执行跳转，就是跳转与 `'Location': '/new'` 相关的地址
+- **301的设置要慎重。** 浏览器会把这个跳转信息缓存在浏览器中，即使我们服务端改变 `301` 的原地址返回的东西，在用户不清理缓存的情况下，浏览器还是会主动读取缓存，自动地跳转到原来 301 定向的那里。
+
+### Content-Security-Policy, CSP
+- 限制资源获取
+- 报告资源获取越权
+
+限制方式：
+- default-src限制全局
+- 特定的资源类型（connect-src、img-src、font-src、frame-src等等）
+
+#### 禁止inline-js防止XSS攻击
+我们在 html 里写 script 叫做 inline js 。
+
+```js
+reponse.writeHead(200, {
+  'Content-Type': 'text/html',
+  'Content-Security-Policy': 'default-src http: https:'
+})
+```
+
+如上只允许外链方式加载。
+
+#### 只允许加载本域名提供脚本
+```js
+'Content-Security-Policy': 'default-src \'self\''
+```
+
+注意要用引号引起来。
+
+#### 只能跳转本站（用form限制提交范围）
+```js
+'Content-Security-Policy': 'default-src \'self\'; form-action \'self\''
+```
+
+#### 推荐阅读：mdn.csp
+[https://developer.mozilla.org/zh-CN/docs/Web/HTTP/CSP](https://developer.mozilla.org/zh-CN/docs/Web/HTTP/CSP)
+官方文档，内容安全策略很全。
+
+#### report-uri向服务端汇报内容
+```js
+'Content-Security-Policy': 'default-src \'self\'; form-action \'self\'; report-uri /report'
+```
+设置 report-uri 后，浏览器遇到限制，向服务端主动发送汇报。
+
+![](./images/20210518csp-report.png)
+
+#### 在html里写在meta里也可
+
+不在服务程序写 http 头，在 html 的 meta 里写效果也相同。
+
+```html
+<meta http-equiv="Content-Security-Policy" content="script-src 'self'; form-action 'self';">
+```
+
+注意，不需要对引号转义了。
+
+此外，这里不可以设置 report-uri 。总的来说，还是推荐在 http 头里来设置 csp 。
