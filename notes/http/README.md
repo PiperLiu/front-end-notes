@@ -6,6 +6,7 @@
 
 - [01HTTP协议基础及发展历史](#01http协议基础及发展历史)
 - [02http各种特性总览](#02http各种特性总览)
+- [Nginx代理以及面向未来的HTTP](#nginx代理以及面向未来的http)
 
 <!-- /code_chunk_output -->
 
@@ -70,3 +71,5 @@
   - [推荐阅读：mdn.csp](./drafts/02HTTP各种特性总览.md#推荐阅读mdncsp)
   - [report-uri向服务端汇报内容](./drafts/02HTTP各种特性总览.md#report-uri向服务端汇报内容)
   - [在html里写在meta里也可](./drafts/02HTTP各种特性总览.md#在html里写在meta里也可)
+
+## Nginx代理以及面向未来的HTTP
