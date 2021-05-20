@@ -10,6 +10,13 @@
     - [中间代理可以修改内容（http是明文传输）](#中间代理可以修改内容http是明文传输)
     - [Nginx代理配置和代理缓存的用处](#nginx代理配置和代理缓存的用处)
       - [实验测试缓存](#实验测试缓存)
+    - [HTTPS解析](#https解析)
+      - [HTTPS四次握手](#https四次握手)
+    - [使用Nginx部署HTTPS服务](#使用nginx部署https服务)
+    - [HTTP2的优势](#http2的优势)
+      - [http2实例](#http2实例)
+      - [Nginx配置HTTP2的简单使用](#nginx配置http2的简单使用)
+      - [网上关于http2的实例](#网上关于http2的实例)
 
 <!-- /code_chunk_output -->
 
@@ -187,3 +194,211 @@ console.log('server listening on 8888')
 - 比如我们这里设置是 `X-Test-Cache`
 - 表示，只有头信息 `X-Test-Cache` 的值与以前的相同，才会使用缓存
 - 实践中，我们会用比如 UserAgent 做这个值
+
+### HTTPS解析
+
+![](./images/20210520https.png)
+
+HTTP 不安全，是明文传输，如上，我们wireshark抓包甚至可以抓到 Cookie 。
+
+#### HTTPS四次握手
+![](./images/20210520https2.png)
+
+如上，参考自[feifei_1234](https://www.jianshu.com/p/daa17f50fd93)：
+- 客户端请求建立SSL链接，并向服务端发送一个随机数 Client random 和客户端支持的加密方法，比如RSA公钥加密，此时是明文传输
+- 服务端回复一种客户端支持的加密方法、一个随机数 Server random、授信的服务器证书和非对称加密的公钥（这个证书其实就是公钥，只是包含了很多信息，如证书的颁发机构，过期时间等）
+- 客户端收到服务端的回复后利用服务端的公钥，加上新的随机数 Premaster secret 通过服务端下发的公钥及加密方法进行加密，发送给服务器
+- 服务端收到客户端的回复，利用已知的加解密方式进行解密，同时利用 Client random、Server random和Premaster secret通过一定的算法生成HTTP链接数据传输的对称加密key：session key
+
+![](./images/20210520https3.png)
+
+如上，没办法通过wireshark转包获取加密后的数据。
+
+![](./images/20210520https4.png)
+
+![](./images/20210520https5.png)
+
+- CA 的证书提供商有许多个，有收费的有免费的，而 Let’s Encrypt 就是其中之一的免费提供商
+- caddy 也可为网站开启 https 并自动申请证书
+
+### 使用Nginx部署HTTPS服务
+
+![](./images/20210520nginx部署.png)
+
+如上，首先生成公钥私钥，放在 nginx 的 certs 目录下。
+
+如下配置 test.conf 。
+
+```
+proxy_cache_path cache levels=1:2 keys_zone=my_cache:10m;
+
+server {
+  ssl on;  # 启用 ssl ，以支持 https
+  ssl_certificate_key  ../certs/localhost-privkey.pem;
+  ssl_certificate      ../certs/localhost-cert.pem;
+
+  location / {
+    proxy_cache my_cache;
+    proxy_pass http://127.0.0.1:8888;
+    proxy_set_header Host $host;
+  }
+}
+```
+
+![](./images/20210520nginx部署2.png)
+
+此时，如果访问 test.com ，会显示上图。因为谷歌浏览器要求证书由权威机构签发。
+
+```
+server {
+  listen       80;
+  listen       [::]:80 default_server;
+  server_name  test.com;
+
+  return 302 https://$server_name$request_uri;
+
+  location / {
+    proxy_cache my_cache;
+    proxy_pass http://127.0.0.1:8888;
+    proxy_set_header Host $host;
+  }
+}
+```
+
+如上，应用了具体的 nginx 参数进行配置。具体内容暂不讨论。
+
+### HTTP2的优势
+- 信道复用
+- 分帧传输（根据帧信息拼接，不用按顺序发送信息）
+- Server Push，服务端也可以主动发送信息
+
+用户访问一个网站，可以只创建一个 TCP 连接。
+
+#### http2实例
+![http2/test.html](../codes/http2/test.html)
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+  <img src="/test.jpg" alt="">
+</body>
+</html>
+```
+
+![http2/server.js](../codes/http2/server.js)
+
+```js
+const http = require('http')
+const fs = require('fs')
+
+http.createServer(function (request, response) {
+  console.log('request come', request.url)
+
+  const html = fs.readFileSync('test.html', 'utf8')
+  const img = fs.readFileSync('test.jpg')
+  if (request.url === '/') {
+    response.writeHead(200, {
+      'Content-Type': 'text/html',
+      'Connection': 'keep-alive',
+      'Link': '</test.jpg>; as=image; rel=preload'
+    })
+    response.end(html)
+  } else {
+    response.writeHead(200, {
+      'Content-Type': 'image/jpg',
+      'Connection': 'keep-alive' // or close
+    })
+    response.end(img)
+  }
+
+}).listen(8888)
+
+console.log('server listening on 8888')
+```
+
+如上：
+- `Link` 是 http2 定义中指定推送哪些内容的头
+- `rel=preload` 让服务端可以主动推送
+
+#### Nginx配置HTTP2的简单使用
+
+在 nginx 转成 http2 服务很简单，但是要在服务端改 nodejs 就稍微有些麻烦。因此我们演示时用 nginx 转。
+
+```
+proxy_cache_path cache levels=1:2 keys_zone=my_cache:10m;
+
+server {
+  listen       443 http2;
+  server_name  test.com;
+
+  http2_push_preload  on;
+
+  ssl on;  # 启用 ssl ，以支持 https
+  ssl_certificate_key  ../certs/localhost-privkey.pem;
+  ssl_certificate      ../certs/localhost-cert.pem;
+
+  location / {
+    proxy_cache my_cache;
+    proxy_pass http://127.0.0.1:8888;
+    proxy_set_header Host $host;
+  }
+}
+```
+
+我们基于 https 才能启用 http2 （谷歌浏览器要求）。
+
+`listen 443 http2`这一条命令就转成了 http2 服务。
+
+`http2_push_preload on` 允许服务端主动推送。
+
+在本机上，浏览器不信任这个连接，但是我们可以通过 `chrome://net-internals/` 查看是否有连接。
+
+![](./images/20210520http2.png)
+
+如上，对于 Host test.com:443 ，其 Pushed 值为 1 ，代表服务端推送了内容，但是 Pushed and claimed 为 0 ，说明我们禁止了接收。
+
+Nginx默认会帮我们转换为 http1.1 如果不支持 http2 的话。
+
+我们在命令行：
+```bash
+curl -v -k https://test.com
+```
+
+![](./images/20210520http2_3.png)
+
+如上，使用了 http2 的服务。
+
+我们还可以通过命令向 nginx 代理要 http1.1 的服务。
+
+```bash
+curl -v -k --http1.1 https://test.com
+```
+
+![](./images/20210520http2_4.png)
+
+可以看到兼容了 http1.1 。
+
+所以，使用 nginx 做 http2 好处：
+- 自动兼容 http1.1
+- 这样，我们在后端开发服务端，我们全部使用 http1.1 就行，不需要考虑客户端这边什么协议，因为 nginx 自动为我们转成 http1.1 协议
+
+#### 网上关于http2的实例
+[https://http2.akamai.com/](https://http2.akamai.com/)
+
+具体的 demo 在 [https://http2.akamai.com/demo/http2-lab.html](https://http2.akamai.com/demo/http2-lab.html)。
+
+这是测试 http2 性能的网站。
+
+比如我们点开第一个 demo ：[对比 http 和 http2(https)的性能](http://http1.akamai.com/demo/index_http.html?h1)。
+
+![](./images/20210520http2_2.png)
+
+按理说，https 要有四次握手，建立传输成本更高，可是如图，其性能更好。说明 http2 很牛逼。
+
