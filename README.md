@@ -18,6 +18,11 @@
 - 我的前端练手项目在 [./projects/README.md](./projects/README.md)
 
 ## 笔记索引
+### 学习心路
+学习心路在 []() ，是关于：
+- 阶段性学习总结
+- 记录自己前端成长轨迹
+
 ### vue3
 关于 vue3 的课程：
 - [./courses/code-for-project](./courses/code-for-project)
