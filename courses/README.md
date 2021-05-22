@@ -16,4 +16,8 @@
 
 ### HTTP协议原理+实践 完整案例解析主流技术
 - 课程地址：[https://coding.imooc.com/learn/list/225.html](https://coding.imooc.com/learn/list/225.html)
-- 项目代码：[coding-225](./courses/coding-225)
+- 项目代码：[coding-225](./coding-225)
+
+### Vue3.0(正式版)+TS 仿知乎专栏企业级项目
+- 课程地址：[https://coding.imooc.com/class/449.html](https://coding.imooc.com/class/449.html)
+- 项目代码：[./vue3ts](./vue3ts)

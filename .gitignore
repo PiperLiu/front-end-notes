@@ -1,5 +1,7 @@
 # practice for mess codes
 practice
+# uncompressed resources
+courses/vue3ts/uncompressed
 
 # node_modules
 **/node_modules
