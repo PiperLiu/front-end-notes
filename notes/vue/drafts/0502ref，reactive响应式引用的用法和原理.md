@@ -12,6 +12,9 @@
       - [非基础类型数据reactive](#非基础类型数据reactive)
       - [只读readonly](#只读readonly)
       - [解构toRefs](#解构torefs)
+    - [响应式应用（TypeScript）](#响应式应用typescript)
+      - [在reactive中指定类型](#在reactive中指定类型)
+      - [用...data展开对象在套用toRefs](#用data展开对象在套用torefs)
 
 <!-- /code_chunk_output -->
 
@@ -170,5 +173,53 @@ setup(props, context) {
   // 变成 { name: proxy({ value: 'dell' }) }
   const { name } = toRefs(nameObj);
   return { name }
+}
+```
+
+### 响应式应用（TypeScript）
+#### 在reactive中指定类型
+```ts
+const data = reactive({
+  count: 0,
+  increase: () => { data.count ++ },
+  double: computed(() => data.count * 2)
+})
+```
+
+![](./images/20210524reactive.png)
+
+如上，会报错（vetur 暂时没有解决 `computed` 循环推论的问题）。`data.count` 会被认为是 `any` 类型，这将导致 `data` 被推断为 `any` 。
+
+解决方案是规定 `data` 的类型。
+```ts
+interface DataProps {
+  count: number;
+  double: number;
+  increase: () => void;
+}
+
+const data: DataProps = reactive({
+  count: 0,
+  increase: () => { data.count ++ },
+  double: computed(() => data.count * 2)
+})
+```
+
+#### 用...data展开对象在套用toRefs
+
+```ts
+return {
+  ...data
+}
+```
+
+上面会把 data 展开，返回的 count 、 increase 、 double 都是普通的 js 数据。
+
+我们需要先将 data 对象转换为可展开的响应式对象，如下。
+
+```ts
+const refData = toRefs(data)
+return {
+  ...refData
 }
 ```

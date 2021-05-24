@@ -3,57 +3,60 @@
 
 <!-- code_chunk_output -->
 
-  - [01基础知识杂记](#01基础知识杂记)
-    - [01基础操作](#01基础操作)
-    - [02生命周期](#02生命周期)
-    - [03常用模板语法](#03常用模板语法)
-    - [04数据，方法，计算属性和侦听器](#04数据方法计算属性和侦听器)
-    - [05样式绑定语法](#05样式绑定语法)
-    - [06条件渲染](#06条件渲染)
-    - [07列表循环渲染](#07列表循环渲染)
-    - [08事件绑定](#08事件绑定)
-    - [09表单中的双向绑定指令的使用](#09表单中的双向绑定指令的使用)
-  - [02组件](#02组件)
-    - [01组件的定义及复用性，局部组件和全局组件](#01组件的定义及复用性局部组件和全局组件)
-    - [02组件间传值及传值校验](#02组件间传值及传值校验)
-    - [03单向数据流](#03单向数据流)
-    - [04Non-Props属性](#04non-props属性)
-    - [05父子组件间如何通过事件进行通信](#05父子组件间如何通过事件进行通信)
-    - [06组件间双向绑定高级内容](#06组件间双向绑定高级内容)
-    - [07使用插槽和具名插槽解决组件内容传递问题](#07使用插槽和具名插槽解决组件内容传递问题)
-    - [08作用域插槽](#08作用域插槽)
-    - [09动态组件和异步组件](#09动态组件和异步组件)
-    - [10v-once、ref和provide/inject](#10v-once-ref和provideinject)
+- [01基础知识杂记](#01基础知识杂记)
+  - [01基础操作](#01基础操作)
+  - [02生命周期](#02生命周期)
+  - [03常用模板语法](#03常用模板语法)
+  - [04数据，方法，计算属性和侦听器](#04数据方法计算属性和侦听器)
+  - [05样式绑定语法](#05样式绑定语法)
+  - [06条件渲染](#06条件渲染)
+  - [07列表循环渲染](#07列表循环渲染)
+  - [08事件绑定](#08事件绑定)
+  - [09表单中的双向绑定指令的使用](#09表单中的双向绑定指令的使用)
+- [02组件](#02组件)
+  - [01组件的定义及复用性，局部组件和全局组件](#01组件的定义及复用性局部组件和全局组件)
+  - [02组件间传值及传值校验](#02组件间传值及传值校验)
+  - [03单向数据流](#03单向数据流)
+  - [04Non-Props属性](#04non-props属性)
+  - [05父子组件间如何通过事件进行通信](#05父子组件间如何通过事件进行通信)
+  - [06组件间双向绑定高级内容](#06组件间双向绑定高级内容)
+  - [07使用插槽和具名插槽解决组件内容传递问题](#07使用插槽和具名插槽解决组件内容传递问题)
+  - [08作用域插槽](#08作用域插槽)
+  - [09动态组件和异步组件](#09动态组件和异步组件)
+  - [10v-once、ref和provide/inject](#10v-once-ref和provideinject)
 - [03Vue中的动画](#03vue中的动画)
-    - [01使用 Vue 实现基础的 CSS 过渡与动画效果](#01使用-vue-实现基础的-css-过渡与动画效果)
-    - [02使用transition标签实现单元素组件的过渡和动画效果](#02使用transition标签实现单元素组件的过渡和动画效果)
-    - [03组件和元素切换动画的实现](#03组件和元素切换动画的实现)
-    - [04列表动画](#04列表动画)
-    - [05状态动画](#05状态动画)
-  - [04高级语法](#04高级语法)
-    - [01Mixin混入的基础语法](#01mixin混入的基础语法)
-    - [02开发实现Vue中的自定义指令](#02开发实现vue中的自定义指令)
-    - [03Teleport传送门](#03teleport传送门)
-    - [04更加底层的render函数](#04更加底层的render函数)
-    - [05插件的定义和使用](#05插件的定义和使用)
-    - [06数据校验插件开发实例](#06数据校验插件开发实例)
+  - [01使用 Vue 实现基础的 CSS 过渡与动画效果](#01使用-vue-实现基础的-css-过渡与动画效果)
+  - [02使用transition标签实现单元素组件的过渡和动画效果](#02使用transition标签实现单元素组件的过渡和动画效果)
+  - [03组件和元素切换动画的实现](#03组件和元素切换动画的实现)
+  - [04列表动画](#04列表动画)
+  - [05状态动画](#05状态动画)
+- [04高级语法](#04高级语法)
+  - [01Mixin混入的基础语法](#01mixin混入的基础语法)
+  - [02开发实现Vue中的自定义指令](#02开发实现vue中的自定义指令)
+  - [03Teleport传送门](#03teleport传送门)
+  - [04更加底层的render函数](#04更加底层的render函数)
+  - [05插件的定义和使用](#05插件的定义和使用)
+  - [06数据校验插件开发实例](#06数据校验插件开发实例)
 - [05Composition API](#05composition-api)
-    - [01Setup函数的使用](#01setup函数的使用)
-    - [02ref，reactive响应式引用的用法和原理](#02refreactive响应式引用的用法和原理)
-    - [03toRef以及context参数](#03toref以及context参数)
-    - [04实例：用Composition-API开发to-do-list](#04实例用composition-api开发to-do-list)
-    - [05computed方法生成计算属性](#05computed方法生成计算属性)
-    - [06watch以及其与watchEffect的差异性](#06watch以及其与watcheffect的差异性)
-    - [07生命周期函数的新写法](#07生命周期函数的新写法)
-    - [08Provide、Inject、模板ref用法](#08provide-inject-模板ref用法)
+  - [01Setup函数的使用](#01setup函数的使用)
+  - [02ref，reactive响应式引用的用法和原理](#02refreactive响应式引用的用法和原理)
+  - [03toRef以及context参数](#03toref以及context参数)
+  - [04实例：用Composition-API开发to-do-list](#04实例用composition-api开发to-do-list)
+  - [05computed方法生成计算属性](#05computed方法生成计算属性)
+  - [06watch以及其与watchEffect的差异性](#06watch以及其与watcheffect的差异性)
+  - [07生命周期函数的新写法](#07生命周期函数的新写法)
+  - [08Provide、Inject、模板ref用法](#08provide-inject-模板ref用法)
+  - [09vue3的proxy](#09vue3的proxy)
+  - [10将逻辑抽离出来](#10将逻辑抽离出来)
+  - [11typescript对vue3的加持](#11typescript对vue3的加持)
 - [06Vue项目开发配套工具讲解](#06vue项目开发配套工具讲解)
-    - [01VueCli的使用和单文件组件](#01vuecli的使用和单文件组件)
-    - [02Vue-Router路由的理解和使用](#02vue-router路由的理解和使用)
-    - [03VueX的语法详解](#03vuex的语法详解)
-    - [04使用axios发送ajax请求](#04使用axios发送ajax请求)
+  - [01VueCli的使用和单文件组件](#01vuecli的使用和单文件组件)
+  - [02Vue-Router路由的理解和使用](#02vue-router路由的理解和使用)
+  - [03VueX的语法详解](#03vuex的语法详解)
+  - [04使用axios发送ajax请求](#04使用axios发送ajax请求)
 - [07以实战项目为例](#07以实战项目为例)
-    - [01京东到家](#01京东到家)
-    - [02（知乎）者也](#02知乎者也)
+  - [01京东到家](#01京东到家)
+  - [02（知乎）者也](#02知乎者也)
 
 <!-- /code_chunk_output -->
 
@@ -216,7 +219,7 @@
 - [ref](./drafts/0210v-once、ref和provide.md#ref)
 - [provide / inject](./drafts/0210v-once、ref和provide.md#provide-inject)
 
-# 03Vue中的动画
+## 03Vue中的动画
 ### 01使用 Vue 实现基础的 CSS 过渡与动画效果
 [./drafts/0301使用Vue实现基础的CSS过渡与动画效果.md](./drafts/0301使用Vue实现基础的CSS过渡与动画效果.md)
 
@@ -303,7 +306,7 @@ Vue3 新特性。
 - [用mixin](./drafts/0406数据校验插件开发实例.md#用mixin)
 - [用plugin](./drafts/0406数据校验插件开发实例.md#用plugin)
 
-# 05Composition API
+## 05Composition API
 
 ### 01Setup函数的使用
 [./drafts/0501Setup函数的使用.md](./drafts/0501Setup函数的使用.md)
@@ -321,6 +324,9 @@ Vue3 新特性。
   - [非基础类型数据reactive](./drafts/0502ref，reactive响应式引用的用法和原理.md#非基础类型数据reactive)
   - [只读readonly](./drafts/0502ref，reactive响应式引用的用法和原理.md#只读readonly)
   - [解构toRefs](./drafts/0502ref，reactive响应式引用的用法和原理.md#解构torefs)
+- [响应式应用（TypeScript）](./drafts/0502ref，reactive响应式引用的用法和原理.md#响应式应用typescript)
+  - [在reactive中指定类型](./drafts/0502ref，reactive响应式引用的用法和原理.md#在reactive中指定类型)
+  - [用...data展开对象在套用toRefs](./drafts/0502ref，reactive响应式引用的用法和原理.md#用data展开对象在套用torefs)
 
 ### 03toRef以及context参数
 [./drafts/0503toRef以及context参数.md](./drafts/0503toRef以及context参数.md)
@@ -376,7 +382,21 @@ Vue3 新特性。
   - [应用readonly更加安全](./drafts/0508Provide、Inject、模板ref用法.md#应用readonly更加安全)
 - [模板ref用法](./drafts/0508Provide、Inject、模板ref用法.md#模板ref用法)
 
-# 06Vue项目开发配套工具讲解
+### 09vue3的proxy
+[./drafts/0509vue3的proxy.md](./drafts/0509vue3的proxy.md)
+
+- [vue3使用proxy](./drafts/0509vue3的proxy.md#vue3使用proxy)
+
+### 10将逻辑抽离出来
+[./drafts/0510将逻辑抽离出来.md](./drafts/0510将逻辑抽离出来.md)
+
+- [以封装鼠标事件为例](./drafts/0510将逻辑抽离出来.md#以封装鼠标事件为例)
+- [以封装axios为例](./drafts/0510将逻辑抽离出来.md#以封装axios为例)
+
+### 11typescript对vue3的加持
+[./drafts/0511typescript对vue3的加持.md](./drafts/0511typescript对vue3的加持.md)
+
+## 06Vue项目开发配套工具讲解
 
 ### 01VueCli的使用和单文件组件
 [./drafts/0601VueCli的使用和单文件组件.md](./drafts/0601VueCli的使用和单文件组件.md)
@@ -413,7 +433,7 @@ Vue3 新特性。
 ### 04使用axios发送ajax请求
 [./drafts/0604使用axios发送ajax请求.md](./drafts/0604使用axios发送ajax请求.md)
 
-# 07以实战项目为例
+## 07以实战项目为例
 ### 01京东到家
 [./drafts/0701京东到家.md](./drafts/0701京东到家.md)
 
