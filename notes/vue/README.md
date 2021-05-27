@@ -37,6 +37,8 @@
   - [04更加底层的render函数](#04更加底层的render函数)
   - [05插件的定义和使用](#05插件的定义和使用)
   - [06数据校验插件开发实例](#06数据校验插件开发实例)
+  - [07异步好帮手：Suspense](#07异步好帮手suspense)
+  - [08Vue3的全局API](#08vue3的全局api)
 - [05Composition API](#05composition-api)
   - [01Setup函数的使用](#01setup函数的使用)
   - [02ref，reactive响应式引用的用法和原理](#02refreactive响应式引用的用法和原理)
@@ -305,6 +307,20 @@ Vue3 新特性。
 - [校验数据](./drafts/0406数据校验插件开发实例.md#校验数据)
 - [用mixin](./drafts/0406数据校验插件开发实例.md#用mixin)
 - [用plugin](./drafts/0406数据校验插件开发实例.md#用plugin)
+
+### 07异步好帮手：Suspense
+[./drafts/0407异步好帮手：Suspense.md](./drafts/0407异步好帮手：Suspense.md)
+
+- [Suspense](./drafts/0407异步好帮手：Suspense.md#suspense)
+- [Suspense使用实例](./drafts/0407异步好帮手：Suspense.md#suspense使用实例)
+- [Suspense使用实例（async）](./drafts/0407异步好帮手：Suspense.md#suspense使用实例async)
+- [OnErrorCaptured](./drafts/0407异步好帮手：Suspense.md#onerrorcaptured)
+
+### 08Vue3的全局API
+[./drafts/0408Vue3的全局API.md](./drafts/0408Vue3的全局API.md)
+
+- [Vue2全局API遇到的问题](./drafts/0408Vue3的全局API.md#vue2全局api遇到的问题)
+- [Vue2与Vue3对比](./drafts/0408Vue3的全局API.md#vue2与vue3对比)
 
 ## 05Composition API
 
