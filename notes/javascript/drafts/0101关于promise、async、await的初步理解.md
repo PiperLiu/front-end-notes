@@ -27,7 +27,7 @@ const imgPromise = ( url ) => {
     };
   });
 };
-// 因为 Promise 定义后会理解执行
+// 因为 Promise 定义后会立即执行
 // 所以一般让函数返回一个 new Promise() ，来先不执行 Promise
 
 imgPromise( imgAddress )
