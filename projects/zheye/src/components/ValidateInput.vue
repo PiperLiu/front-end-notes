@@ -6,6 +6,7 @@
       :value="inputRef.val"
       @blur="validateInput"
       @input="updateValue"
+      v-bind="$attrs"
     >
     <span v-if="inputRef.error" class="invalid-feedback">{{inputRef.message}}</span>
   </div>
@@ -15,8 +16,16 @@
 import { defineComponent, reactive, PropType } from 'vue'
 const emailReg = /^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/
 interface RuleProp {
-  type: 'required' | 'email';
-  message: string;
+  type: 'required' | 'email' | 'range';
+  message?: string;
+  min?: {
+    message: string;
+    length: number;
+  };
+  max?: {
+    message: string;
+    length: number;
+  }
 }
 export type RulesProp = RuleProp[]
 export default defineComponent({
@@ -24,6 +33,7 @@ export default defineComponent({
     rules: Array as PropType<RulesProp>,
     modelValue: String
   },
+  inheritAttrs: false,
   setup (props, context) {
     const inputRef = reactive({
       val: props.modelValue || '',
@@ -39,7 +49,7 @@ export default defineComponent({
       if (props.rules) {
         const allPassed = props.rules.every(rule => {
           let passed = true
-          inputRef.message = rule.message
+          inputRef.message = rule.message || ''
           switch (rule.type) {
             case 'required':
               passed = (inputRef.val.trim() !== '')
@@ -47,6 +57,18 @@ export default defineComponent({
             case 'email':
               passed = emailReg.test(inputRef.val)
               break
+            case 'range': {
+              const { min, max } = rule
+              if (min && inputRef.val.trim().length < min.length) {
+                passed = false
+                inputRef.message = min.message
+              }
+              if (max && inputRef.val.trim().length > max.length) {
+                passed = false
+                inputRef.message = max.message
+              }
+              break
+            }
             default:
               break
           }

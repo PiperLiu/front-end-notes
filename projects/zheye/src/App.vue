@@ -5,12 +5,21 @@
     <form action="">
       <div class="mb-3">
         <label class="form-label">邮箱地址</label>
-        <validate-input :rules="emailRules" v-model="emailVal"></validate-input>
-        {{ emailVal }}
+        <validate-input
+          :rules="emailRules"
+          v-model="emailVal"
+          placeholder="请输入邮箱地址"
+          type="text"
+        ></validate-input>
       </div>
       <div class="mb-3">
         <label class="form-label">密码</label>
-        <validate-input :rules="emailRules"></validate-input>
+        <validate-input
+          :rules="passwordRules"
+          v-model="passwordVal"
+          placeholder="请输入密码"
+          type="password"
+        ></validate-input>
       </div>
     </form>
   </div>
@@ -82,15 +91,26 @@ export default defineComponent({
   },
   setup () {
     const emailVal = ref('piper')
+    const passwordVal = ref('')
     const emailRules: RulesProp = [
       { type: 'required', message: '电子邮件不能为空' },
       { type: 'email', message: '请输入正确的电子邮箱格式' }
+    ]
+    const passwordRules: RulesProp = [
+      { type: 'required', message: '密码不能为空' },
+      {
+        type: 'range',
+        min: { message: '你的密码至少包括六位，不能含有空格', length: 6 },
+        max: { message: '你的密码最多包括十二位，不能含有空格', length: 12 }
+      }
     ]
     return {
       list: testData,
       currentUser: currentUser,
       emailRules,
-      emailVal
+      emailVal,
+      passwordRules,
+      passwordVal
     }
   }
 })
