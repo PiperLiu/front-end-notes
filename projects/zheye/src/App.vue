@@ -2,7 +2,7 @@
   <div class="container">
     <global-header :user="currentUser"></global-header>
     <column-list :list="list"></column-list>
-    <form action="">
+    <validate-form @form-submit="onFormSubmit">
       <div class="mb-3">
         <label class="form-label">邮箱地址</label>
         <validate-input
@@ -21,7 +21,7 @@
           type="password"
         ></validate-input>
       </div>
-    </form>
+    </validate-form>
   </div>
 </template>
 
@@ -30,7 +30,8 @@ import { defineComponent, ref } from 'vue'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import ColumnList, { ColumnProps } from './components/ColumnList.vue'
 import GlobalHeader, { UserProps } from './components/GlobalHeader.vue'
-import validateInput, { RulesProp } from './components/ValidateInput.vue'
+import ValidateInput, { RulesProp } from './components/ValidateInput.vue'
+import ValidateForm from './components/ValidateForm.vue'
 
 const currentUser: UserProps = {
   isLogin: true,
@@ -87,7 +88,8 @@ export default defineComponent({
   components: {
     GlobalHeader,
     ColumnList,
-    validateInput
+    ValidateInput,
+    ValidateForm
   },
   setup () {
     const emailVal = ref('piper')
@@ -104,13 +106,20 @@ export default defineComponent({
         max: { message: '你的密码最多包括十二位，不能含有空格', length: 12 }
       }
     ]
+
+    const onFormSubmit = () => {
+      console.log(emailVal.value)
+      console.log(passwordVal.value)
+    }
+
     return {
       list: testData,
       currentUser: currentUser,
       emailRules,
       emailVal,
       passwordRules,
-      passwordVal
+      passwordVal,
+      onFormSubmit
     }
   }
 })
