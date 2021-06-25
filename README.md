@@ -1,16 +1,15 @@
 # Piper的前端学习笔记
 
-<!-- @import "[TOC]" {cmd="toc" depthFrom=1 depthTo=6 orderedList=false} -->
+<!-- @import "[TOC]" {cmd="toc" depthFrom=2 depthTo=6 orderedList=false} -->
 
 <!-- code_chunk_output -->
 
-- [Piper的前端学习笔记](#piper的前端学习笔记)
-  - [项目结构介绍](#项目结构介绍)
-  - [笔记索引](#笔记索引)
-    - [学习心路](#学习心路)
-    - [vue3](#vue3)
-    - [http](#http)
-    - [typescript](#typescript)
+- [项目结构介绍](#项目结构介绍)
+- [笔记索引](#笔记索引)
+  - [学习心路](#学习心路)
+  - [vue3](#vue3)
+  - [http](#http)
+  - [typescript](#typescript)
 
 <!-- /code_chunk_output -->
 
