@@ -5,6 +5,7 @@
 <!-- code_chunk_output -->
 
 - [关于 vue3 的笔记](#关于-vue3-的笔记)
+- [关于 react 的笔记](#关于-react-的笔记)
 - [关于 http 的笔记](#关于-http-的笔记)
 - [关于 JavaScript 的笔记](#关于-javascript-的笔记)
 - [关于 typescript 的笔记](#关于-typescript-的笔记)
@@ -13,6 +14,9 @@
 
 ### 关于 vue3 的笔记
 - [./notes/vue/README.md](./vue/README.md)
+
+### 关于 react 的笔记
+- [./react/README.md](./react/README.md)
 
 ### 关于 http 的笔记
 - [./notes/http/README.md](./http/README.md)
