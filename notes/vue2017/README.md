@@ -15,6 +15,7 @@
 <!-- code_chunk_output -->
 
 - [响应性](#响应性)
+- [插件编写](#插件编写)
 
 <!-- /code_chunk_output -->
 
@@ -25,3 +26,10 @@
 - [getter和setter](./drafts/vue2017.1.md#getter和setter)
 - [依赖跟踪（订阅发布模式）](./drafts/vue2017.1.md#依赖跟踪订阅发布模式)
 - [实现迷你观察者（简易响应式案例）](./drafts/vue2017.1.md#实现迷你观察者简易响应式案例)
+
+### 插件编写
+[./drafts/vue2017.2.md](./drafts/vue2017.2.md)
+
+- [插件简介](./drafts/vue2017.2.md#插件简介)
+- [$.options属性](./drafts/vue2017.2.md#options属性)
+- [编写一个插件](./drafts/vue2017.2.md#编写一个插件)
