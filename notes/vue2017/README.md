@@ -47,3 +47,9 @@
 - [动态渲染组件](./drafts/vue2017.3.md#动态渲染组件)
 - [函数组件](./drafts/vue2017.3.md#函数组件)
 - [高阶函数 higher-order component](./drafts/vue2017.3.md#高阶函数-higher-order-component)
+
+### 状态管理
+[./drafts/vue2017.4.md](./drafts/vue2017.4.md)
+
+前端以前是没有状态管理的，直到 Fackbook 提出一个叫 Flux 的概念，才有了状态管理。
+
