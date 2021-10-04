@@ -16,6 +16,7 @@
 
 - [响应性](#响应性)
 - [插件编写](#插件编写)
+- [渲染函数](#渲染函数)
 
 <!-- /code_chunk_output -->
 
@@ -33,3 +34,16 @@
 - [插件简介](./drafts/vue2017.2.md#插件简介)
 - [$.options属性](./drafts/vue2017.2.md#options属性)
 - [编写一个插件](./drafts/vue2017.2.md#编写一个插件)
+
+### 渲染函数
+[./drafts/vue2017.3.md](./drafts/vue2017.3.md)
+
+- [虚拟DOM](./drafts/vue2017.3.md#虚拟dom)
+- [Vue的V-DOM学习资源：template-explorer](./drafts/vue2017.3.md#vue的v-dom学习资源template-explorer)
+- [整合渲染函数和响应系统](./drafts/vue2017.3.md#整合渲染函数和响应系统)
+- [template和jsx对比](./drafts/vue2017.3.md#template和jsx对比)
+- [Render Function API](./drafts/vue2017.3.md#render-function-api)
+- [动态渲染标签](./drafts/vue2017.3.md#动态渲染标签)
+- [动态渲染组件](./drafts/vue2017.3.md#动态渲染组件)
+- [函数组件](./drafts/vue2017.3.md#函数组件)
+- [高阶函数 higher-order component](./drafts/vue2017.3.md#高阶函数-higher-order-component)
