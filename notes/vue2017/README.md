@@ -62,3 +62,9 @@
 - [类似Redux的functional](./drafts/vue2017.4.md#类似redux的functional)
 
 ### 哈希路由基础
+[./drafts/vue2017.5.md](./drafts/vue2017.5.md)
+
+- [基本哈希路由实现](./drafts/vue2017.5.md#基本哈希路由实现)
+- [实现一个路由表](./drafts/vue2017.5.md#实现一个路由表)
+- [正则表达式](./drafts/vue2017.5.md#正则表达式)
+- [动态路由](./drafts/vue2017.5.md#动态路由)
