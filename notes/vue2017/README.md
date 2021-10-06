@@ -17,6 +17,8 @@
 - [响应性](#响应性)
 - [插件编写](#插件编写)
 - [渲染函数](#渲染函数)
+- [状态管理](#状态管理)
+- [哈希路由基础](#哈希路由基础)
 
 <!-- /code_chunk_output -->
 
@@ -53,3 +55,10 @@
 
 前端以前是没有状态管理的，直到 Fackbook 提出一个叫 Flux 的概念，才有了状态管理。
 
+- [简单的父组件通过props传递数据实例](./drafts/vue2017.4.md#简单的父组件通过props传递数据实例)
+- [通过组件管理数据的实例](./drafts/vue2017.4.md#通过组件管理数据的实例)
+- [通过响应式对象管理数据的实例（引出VueX）](./drafts/vue2017.4.md#通过响应式对象管理数据的实例引出vuex)
+- [mutaions](./drafts/vue2017.4.md#mutaions)
+- [类似Redux的functional](./drafts/vue2017.4.md#类似redux的functional)
+
+### 哈希路由基础
