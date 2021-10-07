@@ -1,5 +1,11 @@
 # 尤雨溪教你写vue 高级vue教程 源码分析 中文字幕翻译完毕
 
+![](./drafts/images/2021100704.png)
+
+![](./drafts/images/2021100705.png)
+
+感谢 [Frontend Masters](https://frontendmasters.com/) 的 workshop 以及 up主 [蟹老板在奔跑](https://space.bilibili.com/43688692) 的搬运。
+
 - 🔗B站连接：[https://www.bilibili.com/video/BV1d4411v7UX](https://www.bilibili.com/video/BV1d4411v7UX)
 - 🔗课程练习代码：[https://github.com/zhengguorong/vue-advanced-workshop](https://github.com/zhengguorong/vue-advanced-workshop)
   - 😋我的代码在：[https://github.com/PiperLiu/vue-advanced-workshop](https://github.com/PiperLiu/vue-advanced-workshop)
@@ -85,3 +91,10 @@
 - [国家化$t()实现](./drafts/vue2017.7.md#国家化t实现)
 
 ### 一些讨论问题
+[./drafts/vue2017.8.md](./drafts/vue2017.8.md)
+
+- [高阶函数和mixin的选择](./drafts/vue2017.8.md#高阶函数和mixin的选择)
+- [Web Components](./drafts/vue2017.8.md#web-components)
+- [什么时候使用服务端渲染](./drafts/vue2017.8.md#什么时候使用服务端渲染)
+- [patreon/evanyou](./drafts/vue2017.8.md#patreonevanyou)
+
