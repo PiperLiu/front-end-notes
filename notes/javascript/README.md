@@ -3,12 +3,12 @@
 
 <!-- code_chunk_output -->
 
-- [01杂记](#01杂记)
+- [01异步](#01异步)
   - [01关于promise、async、await的初步理解](#01关于promise-async-await的初步理解)
 
 <!-- /code_chunk_output -->
 
-## 01杂记
+## 01异步
 ### 01关于promise、async、await的初步理解
 [./drafts/0101关于promise、async、await的初步理解.md](./drafts/0101关于promise、async、await的初步理解.md)
 

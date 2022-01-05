@@ -21,73 +21,27 @@
 
 # Piper的前端学习笔记
 
-## 目录📕
+### 📕 目前已学习内容
 
-<!-- @import "[TOC]" {cmd="toc" depthFrom=2 depthTo=6 orderedList=false} -->
+🎳 基本功与底层：
+- [👔 一些关于 JavaScript 的笔记](./notes/javascript/README.md)
+- [🦺 一些关于 TypeScript 的笔记](./notes/typescript/README.md)
+- [🧥 前端视角下的 http 协议](./notes/http/README.md)
 
-<!-- code_chunk_output -->
+🎩 框架与工具：
+- [🥎 Vue 3 入门与实战](./notes/vue/README.md)
+- [🏀 动手实现简易 Vue 2](./notes/vue2017/README.md)
+- [🏐 React 16 入门](./notes/react/README.md)
 
-- [目录📕](#目录)
-- [🥼项目结构介绍](#项目结构介绍)
-- [🎨笔记索引](#笔记索引)
-  - [👩‍🔧学习心路](#学习心路)
-  - [👩‍💻vue](#vue)
-    - [👨‍🔬认识 vue3](#认识-vue3)
-    - [🎢vue 进阶](#vue-进阶)
-  - [👨‍🍳react](#react)
-  - [👨‍🎓http](#http)
-  - [🧚‍♀js/ts](#jsts)
-  - [💎css](#css)
+📻 读书笔记：
+- [🔒 《CSS解密》](./books/csssecrets/README.md)
 
-<!-- /code_chunk_output -->
-
-## 🥼项目结构介绍
+### 🎨 项目结构介绍
 - 我学过的课程在 [./courses/README.md](./courses/README.md)
-- 我的笔记在 [./notes/README.md](./notes/README.md)
+- 我的笔记在 [./notes/](./notes/)
+- 读过的书在 [./books/README.md](./books/README.md)
 - 我的前端练手项目在 [./projects/README.md](./projects/README.md)
+- 学习心路在 [./notes/journey/README.md](./notes/journey/README.md) ，是关于：
+  - 阶段性学习总结
+  - 记录自己前端成长轨迹
 
-## 🎨笔记索引
-### 👩‍🔧学习心路
-学习心路在 [./notes/journey/README.md](./notes/journey/README.md) ，是关于：
-- 阶段性学习总结
-- 记录自己前端成长轨迹
-
-### 👩‍💻vue
-
-#### 👨‍🔬认识 vue3
-
-关于 vue3 的课程：
-- [./courses/code-for-project](./courses/code-for-project)
-- [./courses/vue3ts](./courses/vue3ts)
-
-关于 vue3 的笔记：
-- [./notes/vue/README.md](./notes/vue/README.md)
-
-#### 🎢vue 进阶
-
-- 👨‍🏫 2017年尤雨溪Vue高级特性实现方法：[./notes/vue2017/README.md](./notes/vue2017/README.md)
-
-### 👨‍🍳react
-
-- 关于 react 种种笔记：[./notes/react/README.md](./notes/react/README.md)
-
-### 👨‍🎓http
-关于 http 的课程：
-- [./courses/coding-225](./courses/coding-225)
-
-关于 http 的笔记：
-- [./notes/http/README.md](./notes/http/README.md)
-
-### 🧚‍♀js/ts
-关于 javascript 的笔记：
-- [./notes/javascript/README.md](./notes/javascript/README.md)
-
-关于 typescript 的课程：
-- [./courses/vue3ts](./courses/vue3ts)
-
-关于 typescript 的笔记：
-- [./notes/typescript/README.md](./notes/typescript/README.md)
-
-### 💎css
-
-- [./notes/css/README.md](./notes/css/README.md)
