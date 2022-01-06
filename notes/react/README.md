@@ -4,6 +4,7 @@
 <!-- code_chunk_output -->
 
 - [快速上手](#快速上手)
+- [其他笔记](#其他笔记)
 
 <!-- /code_chunk_output -->
 
@@ -28,3 +29,5 @@
   - [留言本实例](./drafts/01React-Demo.md#留言本实例)
 - [Context](./drafts/01React-Demo.md#context)
   - [Context使用示例：样式选择器](./drafts/01React-Demo.md#context使用示例样式选择器)
+
+## 其他笔记

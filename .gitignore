@@ -2,6 +2,7 @@
 practice
 # uncompressed resources
 courses/vue3ts/uncompressed
+courses/reactAntD/uncompressed
 
 # node_modules
 **/node_modules

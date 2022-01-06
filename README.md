@@ -31,10 +31,11 @@
 🎩 框架与工具：
 - [🥎 Vue 3 入门与实战](./notes/vue/README.md)
 - [🏀 动手实现简易 Vue 2](./notes/vue2017/README.md)
-- [🏐 React 16 入门](./notes/react/README.md)
+- [🏐 React 16+ 入门以及杂记](./notes/react/README.md)
+- [🏈 React 16+ 打造组件库以及测试发布实例](./notes/reactAntD/README.md)
 
 📻 读书笔记：
-- [🔒 《CSS解密》](./books/csssecrets/README.md)
+- [🔒 LeaVerou. (2016). CSS揭秘. 人民邮电出版社.（CSS魔法译）](./books/csssecrets/README.md)
 
 ### 🎨 项目结构介绍
 - 我学过的课程在 [./courses/README.md](./courses/README.md)

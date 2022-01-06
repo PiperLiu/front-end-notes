@@ -1,4 +1,4 @@
-# 《CSS揭秘》
+# LeaVerou. (2016). CSS揭秘. 人民邮电出版社.（CSS魔法译）
 
 <!-- @import "[TOC]" {cmd="toc" depthFrom=3 depthTo=6 orderedList=false} -->
 
