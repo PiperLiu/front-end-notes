@@ -6,6 +6,7 @@
 
 - [关于 CSS 的浏览器支持与回退](#关于-css-的浏览器支持与回退)
 - [Web 标准与 CSS 编码技巧](#web-标准与-css-编码技巧)
+- [第2章：背景与边框](#第2章背景与边框)
 
 <!-- /code_chunk_output -->
 
@@ -29,3 +30,7 @@
 - [继承inherit](./drafts/02css.md#继承inherit)
 - [关于响应式网页设计](./drafts/02css.md#关于响应式网页设计)
 - [CSS变量是动态的](./drafts/02css.md#css变量是动态的)
+
+### 第2章：背景与边框
+
+[./drafts/03background.md](./drafts/03background.md)
