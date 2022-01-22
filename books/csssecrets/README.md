@@ -34,3 +34,14 @@
 ### 第2章：背景与边框
 
 [./drafts/03background.md](./drafts/03background.md)
+
+- [盒模型](./drafts/03background.md#盒模型)
+- [强大的条纹背景：基于线性渐变](./drafts/03background.md#强大的条纹背景基于线性渐变)
+  - [重复的条纹？垂直/斜向的条纹？](./drafts/03background.md#重复的条纹垂直斜向的条纹)
+- [基于复杂拼接的条纹](./drafts/03background.md#基于复杂拼接的条纹)
+  - [令人惊奇的 CSS3 Patterns Gallery](./drafts/03background.md#令人惊奇的-css3-patterns-gallery)
+  - [计算 CSS 体积 bytesizenatters.com](./drafts/03background.md#计算-css-体积-bytesizenatterscom)
+  - [网格、波点、棋盘](./drafts/03background.md#网格-波点-棋盘)
+- [连续的图像边框](./drafts/03background.md#连续的图像边框)
+  - [基于不同的 box](./drafts/03background.md#基于不同的-box)
+  - [老式信封、蚂蚁行军边框、脚注](./drafts/03background.md#老式信封-蚂蚁行军边框-脚注)
