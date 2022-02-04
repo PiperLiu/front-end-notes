@@ -7,6 +7,7 @@
 - [关于 CSS 的浏览器支持与回退](#关于-css-的浏览器支持与回退)
 - [Web 标准与 CSS 编码技巧](#web-标准与-css-编码技巧)
 - [第2章：背景与边框](#第2章背景与边框)
+- [第3章：形状](#第3章形状)
 
 <!-- /code_chunk_output -->
 
@@ -48,3 +49,13 @@
 
 ### 第3章：形状
 
+[./drafts/04shape.md](./drafts/04shape.md)
+
+- [椭圆与 border-radius](./drafts/04shape.md)#椭圆与-border-radius)
+  - [自适应椭圆](./drafts/04shape.md)#自适应椭圆)
+  - [使用斜杠范例以及半椭圆](./drafts/04shape.md)#使用斜杠范例以及半椭圆)
+- [平行四边形](./drafts/04shape.md)#平行四边形)
+  - [transform中的skew](./drafts/04shape.md)#transform中的skew)
+  - [菱形图片与clip-path](./drafts/04shape.md)#菱形图片与clip-path)
+  - [切角效果](./drafts/04shape.md)#切角效果)
+  - [梯形标签页与简单的饼图](./drafts/04shape.md)#梯形标签页与简单的饼图)
