@@ -166,8 +166,8 @@
 #### 梯形标签页与简单的饼图
 
 基于一些变形、 SVG 技巧等，不详记：
-- https://dabblet.com/gist/1345dc9399dc8e794502
-- https://dabblet.com/gist/722909b9808c14eb7300
-- https://dabblet.com/gist/66e1e52ac2a44ad87aa4
-- https://dabblet.com/gist/e324a92d31b7f67da5c0
-- https://dabblet.com/gist/4696e4c6700fe9f346d8
+- http://play.csssecrets.io/trapezoid-tabs
+- http://play.csssecrets.io/pie-animated
+- http://play.csssecrets.io/pie-static
+- http://play.csssecrets.io/static-interpolation
+- http://play.csssecrets.io/pie-svg
