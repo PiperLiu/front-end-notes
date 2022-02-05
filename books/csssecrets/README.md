@@ -8,6 +8,7 @@
 - [Web 标准与 CSS 编码技巧](#web-标准与-css-编码技巧)
 - [第2章：背景与边框](#第2章背景与边框)
 - [第3章：形状](#第3章形状)
+- [第4章：视觉效果](#第4章视觉效果)
 
 <!-- /code_chunk_output -->
 
@@ -59,3 +60,15 @@
   - [菱形图片与clip-path](./drafts/04shape.md)#菱形图片与clip-path)
   - [切角效果](./drafts/04shape.md)#切角效果)
   - [梯形标签页与简单的饼图](./drafts/04shape.md)#梯形标签页与简单的饼图)
+
+### 第4章：视觉效果
+
+[./drafts/05shadow.md](./drafts/05shadow.md)
+
+- [单双侧投影 box-shadow](./drafts/05shadow.md#单双侧投影-box-shadow)
+  - [box-shadow 意味着什么？](./drafts/05shadow.md#box-shadow-意味着什么)
+  - [单双侧投影技巧](./drafts/05shadow.md#单双侧投影技巧)
+- [不规则投影与 filter 中的 drop-shadow](./drafts/05shadow.md#不规则投影与-filter-中的-drop-shadow)
+- [染色效果与 filter 技巧以及混合模式 mix-blend-mode 和 background-blend-mode](./drafts/05shadow.md#染色效果与-filter-技巧以及混合模式-mix-blend-mode-和-background-blend-mode)
+- [毛玻璃效果与 blur](./drafts/05shadow.md#毛玻璃效果与-blur)
+- [基于背景条纹或者伪元素的折角效果](./drafts/05shadow.md#基于背景条纹或者伪元素的折角效果)
