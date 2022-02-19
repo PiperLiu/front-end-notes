@@ -1,4 +1,4 @@
-# 第四章：视觉效果
+# 第4章：视觉效果
 
 <!-- @import "[TOC]" {cmd="toc" depthFrom=3 depthTo=6 orderedList=false} -->
 

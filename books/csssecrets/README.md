@@ -9,6 +9,7 @@
 - [第2章：背景与边框](#第2章背景与边框)
 - [第3章：形状](#第3章形状)
 - [第4章：视觉效果](#第4章视觉效果)
+- [第5章：字体排印](#第5章字体排印)
 
 <!-- /code_chunk_output -->
 
@@ -52,14 +53,14 @@
 
 [./drafts/04shape.md](./drafts/04shape.md)
 
-- [椭圆与 border-radius](./drafts/04shape.md)#椭圆与-border-radius)
-  - [自适应椭圆](./drafts/04shape.md)#自适应椭圆)
-  - [使用斜杠范例以及半椭圆](./drafts/04shape.md)#使用斜杠范例以及半椭圆)
-- [平行四边形](./drafts/04shape.md)#平行四边形)
-  - [transform中的skew](./drafts/04shape.md)#transform中的skew)
-  - [菱形图片与clip-path](./drafts/04shape.md)#菱形图片与clip-path)
-  - [切角效果](./drafts/04shape.md)#切角效果)
-  - [梯形标签页与简单的饼图](./drafts/04shape.md)#梯形标签页与简单的饼图)
+- [椭圆与 border-radius](./drafts/04shape.md#椭圆与-border-radius)
+  - [自适应椭圆](./drafts/04shape.md#自适应椭圆)
+  - [使用斜杠范例以及半椭圆](./drafts/04shape.md#使用斜杠范例以及半椭圆)
+- [平行四边形](./drafts/04shape.md#平行四边形)
+  - [transform中的skew](./drafts/04shape.md#transform中的skew)
+  - [菱形图片与clip-path](./drafts/04shape.md#菱形图片与clip-path)
+  - [切角效果](./drafts/04shape.md#切角效果)
+  - [梯形标签页与简单的饼图](./drafts/04shape.md#梯形标签页与简单的饼图)
 
 ### 第4章：视觉效果
 
@@ -72,3 +73,16 @@
 - [染色效果与 filter 技巧以及混合模式 mix-blend-mode 和 background-blend-mode](./drafts/05shadow.md#染色效果与-filter-技巧以及混合模式-mix-blend-mode-和-background-blend-mode)
 - [毛玻璃效果与 blur](./drafts/05shadow.md#毛玻璃效果与-blur)
 - [基于背景条纹或者伪元素的折角效果](./drafts/05shadow.md#基于背景条纹或者伪元素的折角效果)
+
+### 第5章：字体排印
+
+[./drafts/06fonts.md](./drafts/06fonts.md)
+
+- [连字符断行 hyphens](./drafts/06fonts.md#连字符断行-hyphens)
+- [结合伪元素与选择器插入换行](./drafts/06fonts.md#结合伪元素与选择器插入换行)
+- [代码块/文本行的斑马条纹（背景渐变实现）](./drafts/06fonts.md#代码块文本行的斑马条纹背景渐变实现)
+- [调整 tab 的宽度 tab-size](./drafts/06fonts.md#调整-tab-的宽度-tab-size)
+- [连字解决方案（font-variant相关）](./drafts/06fonts.md#连字解决方案font-variant相关)
+- [通过@font-face实现字体嵌入并设立范围](./drafts/06fonts.md#通过font-face实现字体嵌入并设立范围)
+- [自定义下划线（基于背景实现虚线）](./drafts/06fonts.md#自定义下划线基于背景实现虚线)
+- [一些文字特效（凸版印刷、空心字、外发光、凸起、基于SVG的环形文字）](./drafts/06fonts.md#一些文字特效凸版印刷-空心字-外发光-凸起-基于svg的环形文字)
