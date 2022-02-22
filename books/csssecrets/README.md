@@ -10,6 +10,7 @@
 - [第3章：形状](#第3章形状)
 - [第4章：视觉效果](#第4章视觉效果)
 - [第5章：字体排印](#第5章字体排印)
+- [第6章：用户体验](#第6章用户体验)
 
 <!-- /code_chunk_output -->
 
@@ -86,3 +87,20 @@
 - [通过@font-face实现字体嵌入并设立范围](./drafts/06fonts.md#通过font-face实现字体嵌入并设立范围)
 - [自定义下划线（基于背景实现虚线）](./drafts/06fonts.md#自定义下划线基于背景实现虚线)
 - [一些文字特效（凸版印刷、空心字、外发光、凸起、基于SVG的环形文字）](./drafts/06fonts.md#一些文字特效凸版印刷-空心字-外发光-凸起-基于svg的环形文字)
+
+### 第6章：用户体验
+
+[./drafts/07userexperience.md](./drafts/07userexperience.md)
+
+- [选用合适的鼠标光标 cursor](./drafts/07userexperience.md#选用合适的鼠标光标-cursor)
+- [扩大可点击区域](./drafts/07userexperience.md#扩大可点击区域)
+  - [使用 border 扩大热区 hit-area](./drafts/07userexperience.md#使用-border-扩大热区-hit-area)
+  - [利用伪元素扩大热区 hit-area](./drafts/07userexperience.md#利用伪元素扩大热区-hit-area)
+- [自定义复选框（使用 clip rect(0,0,0,0) 隐藏原有复选框）](./drafts/07userexperience.md#自定义复选框使用-clip-rect0000-隐藏原有复选框)
+- [开关式按钮](./drafts/07userexperience.md#开关式按钮)
+- [弱化背景](./drafts/07userexperience.md#弱化背景)
+  - [使用 box-shadow](./drafts/07userexperience.md#使用-box-shadow)
+  - [使用 dialog 标签与 backdrop 伪元素（不完全支持）](./drafts/07userexperience.md#使用-dialog-标签与-backdrop-伪元素不完全支持)
+  - [模糊背景示例：给背景添加类](./drafts/07userexperience.md#模糊背景示例给背景添加类)
+- [基于 backgroud-attachment 的滚动提示](./drafts/07userexperience.md#基于-backgroud-attachment-的滚动提示)
+- [交互式的图片对比控件](./drafts/07userexperience.md#交互式的图片对比控件)
