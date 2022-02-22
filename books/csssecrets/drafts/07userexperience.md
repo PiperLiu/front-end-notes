@@ -16,6 +16,8 @@
   - [模糊背景示例：给背景添加类](#模糊背景示例给背景添加类)
 - [基于 backgroud-attachment 的滚动提示](#基于-backgroud-attachment-的滚动提示)
 - [交互式的图片对比控件](#交互式的图片对比控件)
+  - [基于 resize 空间的方案](#基于-resize-空间的方案)
+  - [基于滑块控件的方案](#基于滑块控件的方案)
 
 <!-- /code_chunk_output -->
 
@@ -399,6 +401,8 @@ ul {
 
 ### 交互式的图片对比控件
 
+#### 基于 resize 空间的方案
+
 ![](./images/2022022208.gif)
 
 ```html
@@ -422,7 +426,7 @@ ul {
   width: 50%;
   max-width: 100%;
   overflow: hidden;
-  resize: horizontal;
+  resize: horizontal;  /* 引出 resize 控件控制横向 */
 }
 
 .image-slider>div:before {
@@ -443,5 +447,60 @@ ul {
 .image-slider img {
   display: block;
   user-select: none;
+}
+```
+
+#### 基于滑块控件的方案
+
+![](./images/2022022209.gif)
+
+```html
+<div class="image-slider">
+  <div>
+    <img src="http://csssecrets.io/images/adamcatlace-before.jpg" alt="Before" />
+  </div>
+  <img src="http://csssecrets.io/images/adamcatlace.jpg" alt="After" />
+  <input type="range" />
+</div>
+```
+
+```css
+.image-slider {
+  position: relative;
+  display: inline-block;
+}
+
+.image-slider>div {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  width: 50%;
+  overflow: hidden;
+}
+
+.image-slider img {
+  display: block;
+  user-select: none;
+}
+
+.image-slider input {
+  position: absolute;
+  left: 0;
+  bottom: 10px;
+  width: 50%;
+  transform: scale(2);
+  transform-origin: left bottom;
+  margin: 0;
+  filter: contrast(.5);
+  mix-blend-mode: luminosity;
+}
+```
+
+```javascript
+var range = document.querySelector('input')
+range.oninput = function() {
+  var div = document.querySelector('body > div > div')
+  div.style.width = this.value + '%'
 }
 ```
