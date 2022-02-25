@@ -11,6 +11,7 @@
 - [第4章：视觉效果](#第4章视觉效果)
 - [第5章：字体排印](#第5章字体排印)
 - [第6章：用户体验](#第6章用户体验)
+- [第7章：结构与布局](#第7章结构与布局)
 
 <!-- /code_chunk_output -->
 
@@ -104,3 +105,22 @@
   - [模糊背景示例：给背景添加类](./drafts/07userexperience.md#模糊背景示例给背景添加类)
 - [基于 backgroud-attachment 的滚动提示](./drafts/07userexperience.md#基于-backgroud-attachment-的滚动提示)
 - [交互式的图片对比控件](./drafts/07userexperience.md#交互式的图片对比控件)
+  - [基于 resize 空间的方案](./drafts/07userexperience.md#基于-resize-空间的方案)
+  - [基于滑块控件的方案](./drafts/07userexperience.md#基于滑块控件的方案)
+
+### 第7章：结构与布局
+
+[./drafts/08grid.md](./drafts/08grid.md)
+
+- [基于 min-content 实现自适应内部元素](./drafts/08grid.md#基于-min-content-实现自适应内部元素)
+- [基于 table-layout 精确控制表格列宽](./drafts/08grid.md#基于-table-layout-精确控制表格列宽)
+- [CSS选择器：根据兄弟元素数量](./drafts/08grid.md#css选择器根据兄弟元素数量)
+  - [当列表包含2到6项时，命中所有列表项](./drafts/08grid.md#当列表包含2到6项时命中所有列表项)
+  - [根据兄弟元素数量设置样式综合案例](./drafts/08grid.md#根据兄弟元素数量设置样式综合案例)
+- [基于 calc 实现页面内容定宽](./drafts/08grid.md#基于-calc-实现页面内容定宽)
+- [垂直居中](./drafts/08grid.md#垂直居中)
+  - [margin 的百分比值是以父元素宽度作为解析基准的](./drafts/08grid.md#margin-的百分比值是以父元素宽度作为解析基准的)
+  - [基于绝对定位和 flexbox 的解决方案](./drafts/08grid.md#基于绝对定位和-flexbox-的解决方案)
+- [将页脚紧贴底部](./drafts/08grid.md#将页脚紧贴底部)
+  - [固定高度的解决方案（计算 em 距离）](./drafts/08grid.md#固定高度的解决方案计算-em-距离)
+  - [基于 flex 的更加灵活的解决方案](./drafts/08grid.md#基于-flex-的更加灵活的解决方案)
