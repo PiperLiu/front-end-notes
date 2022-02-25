@@ -12,6 +12,7 @@
 - [第5章：字体排印](#第5章字体排印)
 - [第6章：用户体验](#第6章用户体验)
 - [第7章：结构与布局](#第7章结构与布局)
+- [第8章：过渡与动画](#第8章过渡与动画)
 
 <!-- /code_chunk_output -->
 
@@ -124,3 +125,15 @@
 - [将页脚紧贴底部](./drafts/08grid.md#将页脚紧贴底部)
   - [固定高度的解决方案（计算 em 距离）](./drafts/08grid.md#固定高度的解决方案计算-em-距离)
   - [基于 flex 的更加灵活的解决方案](./drafts/08grid.md#基于-flex-的更加灵活的解决方案)
+
+### 第8章：过渡与动画
+
+[./drafts/09animation.md](./drafts/09animation.md)
+
+- [贝塞尔曲线 cubic-bezier 实现缓动效果](./drafts/09animation.md#贝塞尔曲线-cubic-bezier-实现缓动效果)
+- [弹性过渡实例：覆盖 transition-timing-function](./drafts/09animation.md#弹性过渡实例覆盖-transition-timing-function)
+- [使用 steps 实现逐帧动画](./drafts/09animation.md#使用-steps-实现逐帧动画)
+- [闪烁效果](./drafts/09animation.md#闪烁效果)
+- [打字效果综合案例（长度单位 ch）](./drafts/09animation.md#打字效果综合案例长度单位-ch)
+- [基于 animation-play-state 实现状态平滑动画](./drafts/09animation.md#基于-animation-play-state-实现状态平滑动画)
+- [记录复杂案例：沿环形路径平移的动画](./drafts/09animation.md#记录复杂案例沿环形路径平移的动画)
