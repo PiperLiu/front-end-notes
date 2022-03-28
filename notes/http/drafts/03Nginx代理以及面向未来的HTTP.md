@@ -275,7 +275,7 @@ server {
 用户访问一个网站，可以只创建一个 TCP 连接。
 
 #### http2实例
-![http2/test.html](../codes/http2/test.html)
+[http2/test.html](../codes/http2/test.html)
 
 ```html
 <!DOCTYPE html>
@@ -292,7 +292,7 @@ server {
 </html>
 ```
 
-![http2/server.js](../codes/http2/server.js)
+[http2/server.js](../codes/http2/server.js)
 
 ```js
 const http = require('http')
