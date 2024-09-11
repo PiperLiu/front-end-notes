@@ -29,9 +29,27 @@
 
 [./drafts/book.01.01.md](./drafts/book.01.01.md)
 
+- [1.1 命令式和声明式](./drafts/book.01.01.md#11-命令式和声明式)
+- [1.2 性能与可维护性的权衡](./drafts/book.01.01.md#12-性能与可维护性的权衡)
+- [1.3 虚拟 DOM 的性能到底如何](./drafts/book.01.01.md#13-虚拟-dom-的性能到底如何)
+- [1.4 运行时和编译时](./drafts/book.01.01.md#14-运行时和编译时)
+- [1.5 总结](./drafts/book.01.01.md#15-总结)
+
 #### 第 2 章 框架设计的核心要素
 
 [./drafts/book.01.02.md](./drafts/book.01.02.md)
+
+- [2.1 提升用户的开发体验](./drafts/book.01.02.md#21-提升用户的开发体验)
+- [2.2 控制框架代码的体积](./drafts/book.01.02.md#22-控制框架代码的体积)
+- [2.3 框架要做到良好的 Tree-Shaking](./drafts/book.01.02.md#23-框架要做到良好的-tree-shaking)
+- [2.4 框架应该输出怎样的构建产物](./drafts/book.01.02.md#24-框架应该输出怎样的构建产物)
+  - [IIFE 立即调用的函数表达式](./drafts/book.01.02.md#iife-立即调用的函数表达式)
+- [主流浏览器已普遍支持的 ESM](./drafts/book.01.02.md#主流浏览器已普遍支持的-esm)
+- [Node.js 使用的 CommonJS 模块](./drafts/book.01.02.md#nodejs-使用的-commonjs-模块)
+- [2.5 特性开关](./drafts/book.01.02.md#25-特性开关)
+- [2.6 错误处理](./drafts/book.01.02.md#26-错误处理)
+- [2.7 良好的 TypeScript 类型支持](./drafts/book.01.02.md#27-良好的-typescript-类型支持)
+- [2.8 总结](./drafts/book.01.02.md#28-总结)
 
 #### 第 3 章 Vue.js 3 的设计思路
 
