@@ -34,6 +34,9 @@
 
 ### 2.4 框架应该输出怎样的构建产物
 
+可以参考 common.js 简单介绍：
+- https://zhuanlan.zhihu.com/p/113009496
+
 #### IIFE 立即调用的函数表达式
 
 ```html

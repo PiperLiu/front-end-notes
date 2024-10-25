@@ -48,6 +48,15 @@ vue 中使用渲染函数 `h` 返回 Object ，而非直接返回 Object 。
 是 `render` 的 `render` ，比如下面的 function `renderer`：
 
 ```js
+// 假设有如下虚拟 DOM
+const vnode = {
+  tag: 'div',
+  props: {
+    onClick: () => alert('hello')
+  },
+  children: 'click me'
+}
+
 function renderer(vnode, container) {
   const el = document.createElement(vnode.tag)
   for (const key in vnode.props) {
@@ -61,6 +70,7 @@ function renderer(vnode, container) {
   }
 
   container.appendChild(el)
+}
 ```
 
 如上，将虚拟 DOM 利用 document 创建真实 DOM 。
@@ -74,6 +84,38 @@ function renderer(vnode, container) {
 ### 3.4 模版的工作原理
 
 模版被编译器编译成渲染函数，渲染函数返回虚拟 DOM 。
+
+比如把如下的 template ，编译成 javascript 。
+```html
+<template>
+  <div @click="handler">
+    click me
+  </div>
+</template>
+
+<script>
+export default {
+  data() { /* ... */ }
+  methods: {
+    handler: () => { /* ... */ }
+  }
+}
+</script>
+```
+
+编译成
+
+```javascript
+export default {
+  data() { /* ... */ }
+  methods: {
+    handler: () => { /* ... */ }
+  },
+  render() {
+    return h('div', { onClick: handler }, 'click me')
+  }
+}
+```
 
 ### 3.5 Vue.js 是各个模块组成的有机整体
 

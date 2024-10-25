@@ -26,7 +26,25 @@
 
 纯运行时：根据 Object 来 Render
 
+```javascript
+const obj = {
+  tag: 'div',
+  ...
+}
+
+function Render(obj, root) {
+  const el = document.createElement(obj.tag)
+  ...
+}
+```
+
 纯编译时：根据 <template> 直接编译成纯 JavaScript
+
+```javascript
+// 直接写 html 更直观
+const obj = Compiler(html)
+Render(obj, document.body)
+```
 
 运行时 + 编译时：根据 <template> 编译成 Object ，再在运行时根据 Object 来 Render
 
