@@ -11,6 +11,11 @@
 - [4.5 嵌套的 effect 与 effect 栈](#45-嵌套的-effect-与-effect-栈)
 - [4.6 避免无限递归循环](#46-避免无限递归循环)
 - [4.7 调度执行](#47-调度执行)
+- [4.8 计算属性 computed 与 lazy](#48-计算属性-computed-与-lazy)
+- [4.9 watch 的实现原理](#49-watch-的实现原理)
+- [4.10 立即执行的 watch 与回调执行时机](#410-立即执行的-watch-与回调执行时机)
+- [4.11 过期的副作用](#411-过期的副作用)
+- [4.12 总结](#412-总结)
 
 <!-- /code_chunk_output -->
 
@@ -410,3 +415,286 @@ obj.foo ++ // 此时 obj.foo 为 3 ，但是打印
 - `jobQueue` 是一个 `Set` ，所以里面只有一个 `fn` 函数，不会有重复的函数（虽然被添加了两次，但是 `Set` 内部会自动去重）
 - `Promise.resolve()` 返回一个已经解析为 resolve 状态的 Promise 对象。这意味着它立即返回一个已经完成的 Promise ，不需要等待任何异步操作
 - 在这个例子中， `flushJob` 函数通过 `p.then(() => {...})` 将任务（即 `jobQueue` 中的函数）添加到微任务队列；这意味着这些任务会在当前执行栈清空后，但在下一个宏任务（如 `setTimeout` 或 `setInterval` ）开始之前执行
+
+### 4.8 计算属性 computed 与 lazy
+
+这里我们总结下前文提到的 `effect` 的作用，因为从现在开始，我们不会再纠结 `track` 和 `trigger` 内部如何实现的了，我们只将 `effect` 作为一个接口使用，它的作用可以描述为：
+- 传入一个 `fn` 函数，这个函数必须要有副作用，而且，它必须要能调动 JS 引擎的 `Proxy` 中的 `get` 拦截器，也就是说，它至少是 `() => a = obj.x` 形式的
+  - 而在接下里的 `computed` 属性中，你还可以看到它是 `() => obj.a + obj.b` 形式的
+  - 对于传入 `obj.a + obj.b` 而言，实际上是通过 `effect` 注册了对 `obj.a` 和 `obj.b` 的拦截，之后所有对 `obj.a` 和 `obj.b` 的读取都会触发相关的 `track` 函数执行，而对 `obj.a` 和 `obj.b` 的修改都会触发相关的 `trigger` 函数执行
+- 此外，还可以传入一个可选参数 `options`
+
+`computed` 函数实际上是对 `effect` 函数的进一步封装。首先，我们需要升级 `effect` 函数。
+
+```javascript
+// 我们希望 effect 函数能够如下使用
+const effectFn = effect(
+  () => obj.foo + obj.bar,
+  { lazy: true }
+)
+const value = effectFn()
+
+// 所以，我们需要为 effect 填加两个功能如下
+// 1. 能够返回 effectFn
+// 2. 能够根据 options.lazy 选项，决定是否立即执行 effectFn
+function effect(fn, options = {}) {
+  const effectFn = () => {
+    cleanup(effectFn)
+    activeEffect = effectFn
+    effectStack.push(effectFn)
+    const res = fn()
+    effectStack.pop()
+    activeEffect = effectStack[effectStack.length - 1]
+    return res
+  }
+  effectFn.options = options
+  effectFn.deps = []
+  if (!options.lazy) {
+    effectFn()
+  }
+  return effectFn
+}
+
+// 由此，我们可以实现 computed 函数
+// 这里的 getter 可以为 () => obj.a + obj.b 形式的函数
+function computed(getter) {
+  let value
+  let dirty = true
+
+  const effectFn = effect(getter, {
+    lazy: true,
+    scheduler() {  // getter 中有值被修改时，会触发 scheduler
+      if (!dirty) {
+        dirty = true  // dirty 用于 cache 结果
+        trigger(obj, 'value')  // 为什么要写这里，作用见下文
+      }
+    }
+  })
+
+  const obj = {
+    get value() {  // 这里 get 关键字相当于 Python 的 @property
+      if (dirty) {
+        value = effectFn()
+        dirty = false
+      }
+      track(obj, 'value')  // 为什么要写这里，作用见下文
+      return value
+    },
+  }
+
+  return obj
+}
+
+// 这样，我们就可以像这样使用 computed 函数
+const data = { foo: 1, bar: 2 }
+const obj = new Proxy(data, { ... })
+const sumRes = computed(() => obj.foo + obj.bar)
+
+console.log(sumRes.value) // 3
+```
+
+为什么要手动写 `track` 和 `trigger` ？
+- 假设不加 `track` 和 `trigger` ，你会发现目前的 `obj.value` 还无法做到响应式，如下面的代码
+
+```javascript
+const sumRes = computed(() => obj.foo + obj.bar)
+
+effect(() => {
+  console.log(sumRes.value)
+})
+
+obj.foo ++
+```
+
+上述代码中，调用 `obj.foo ++` 之后，通过 `effect` 注册的 `console.log` 函数并不会被执行，因为 `sumRes.value` 实际上还不是响应式的，你会发现在 `computed` 函数内部的 `obj` 连个 `Proxy` 都不是，所以其 `get value()` 方法也不会被自动调用。所以需要手动触发。可以理解为这里的 `obj` 其实是半个响应式数据？
+
+### 4.9 watch 的实现原理
+
+我们希望设计 `watch` 接口如下代码。
+
+```javascript
+watch(
+  () => obj.foo + obj.bar,  // 这里也可以不用计算属性，只传入 obj / obj.foo 都行
+  (newVal, oldVal) => {  // callback 函数，简称 cb
+    console.log(`foo + bar changed from ${oldVal} to ${newVal}`)
+  },
+)
+
+obj.foo ++  // 这时会触发 watch 的 callback 函数
+```
+
+`watch` 的实现并不复杂，只要将 `callback` 函数注册到 `effect` 中的 `scheduler` 即可。
+
+```javascript
+function watch(source, cb) {
+  let getter
+  if (typeof source === 'function') {
+    getter = source
+  } else {
+    getter = () => traverse(source)  // 递归遍历到所有的 getter
+  }
+  let oldValue, newValue
+  const effectFn = effect(
+    () => getter(),
+    {
+      lazy: true,
+      {
+        scheduler() {
+          newValue = effectFn()
+          cb(newValue, oldValue)
+          oldValue = newValue
+      }
+    }
+  )
+  oldValue = effectFn()
+}
+
+// traverse 函数用于递归遍历所有的 getter
+function traverse(value, seen = new Set()) {
+  if (typeof value !== 'object' || value === null || seen.has(value)) return
+  seen.add(value)
+  for (const key in value) {
+    traverse(value[key], seen)
+  }
+  return value
+}
+```
+
+### 4.10 立即执行的 watch 与回调执行时机
+
+这里为 `watch` 新增了 options 选项，其中包括 `immediate` 和 `flush` 两个参数。
+
+```javascript
+function watch(source, cb, options = {}) {
+  let getter
+  if (typeof source === 'function') {
+    getter = source
+  } else {
+    getter = () => traverse(source)
+  }
+
+  let oldValue, newValue
+
+  // 将核心任务封装成 job 函数
+  const job = () => {
+    newValue = effectFn()
+    cb(newValue, oldValue)
+    oldValue = newValue
+  }
+
+  const effectFn = effect(
+    () => getter(),
+    {
+      lazy: true,
+      scheduler: () => {
+        if (options.flush === 'post') {
+          const p = Promise.resolve()
+          p.then(job)
+        } else {
+          job()
+        }
+      }
+    }
+  )
+
+  if (options.immediate) {
+    job()
+  } else {
+    oldValue = effectFn()
+  }
+}
+```
+
+`flush` 的参数包括：
+- `post` ，则将 `job` 函数放入微任务队列，等待当前宏任务结束后再执行
+- `sync` ，则立即执行 `job` 函数
+- `pre` ，还无法实现，这涉及到组建的更新时机
+
+### 4.11 过期的副作用
+
+```javascript
+let finalData
+
+watch(obj, async () => {
+  const res = await fetchData('/path/to/request')
+  finalData = res.data
+})
+```
+
+如上情况中，有可能导致：
+- 第一次修改 `obj` 后，等待 `fetchData` 完成，称之为请求 A
+- 第二次修改 `obj` 后，同样等待，称之为请求 B
+- B 已经返回了，赋值给 `finalData` 了
+- 此时 A 紧接着返回，赋值给 `finalData` 了
+- 但是， B 比 A 是更新一次的请求，所以不应该让 A 的结果覆盖 B 的结果
+
+对于这种情况，可以给传入 `watch` 的 `cb` 函数增加一个 `onInvalidate` 参数，用于在副作用失效时执行一些清理操作。
+
+具体而言，应该给 `onInvalidate` 传入一个函数 `fn` ，当这个 `watch` 实例被再次执行时，它会首先调用 `fn` 函数，来清理状态，之后再执行 `cb` 函数。
+
+```javascript
+function watch(source, cb, options = {}) {
+  let getter
+  if (typeof source === 'function') {
+    getter = source
+  } else {
+    getter = () => traverse(source)
+  }
+
+  let oldValue, newValue
+
+  let cleanup  // 来保存用户在 cb 通过 onInvalidate 传入的函数
+  function onInvalidate(fn) {
+    cleanup = fn
+  }
+
+  const job = () => {
+    newValue = effectFn()
+    if (cleanup) {
+      cleanup()
+    }
+    cb(newValue, oldValue, onInvalidate)
+    oldValue = newValue
+  }
+
+  const effectFn = effect(
+    () => getter(),
+    {
+      lazy: true,
+      scheduler: () => {
+        if (options.flush === 'post') {
+          const p = Promise.resolve()
+          p.then(job)
+        } else {
+          job()
+        }
+      }
+    }
+  )
+
+  if (options.immediate) {
+    job()
+  } else {
+    oldValue = effectFn()
+  }
+}
+```
+
+使用 `watch` 接口时，可以像如下这样使用 `onInvalidate` 参数。
+
+```javascript
+watch(obj, async (newVal, oldVal, onInvalidate) => {
+  let expired = false
+  onInvalidate(() => {
+    expired = true
+  })
+
+  const res = await fetchData('/path/to/request')
+
+  if (!expired) {
+    finalData = res.data
+  }
+})
+```
+
+### 4.12 总结

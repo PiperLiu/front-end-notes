@@ -72,6 +72,19 @@
 
 [./drafts/book.02.04.md](./drafts/book.02.04.md)
 
+- [4.1 响应式数据与副作用函数](./drafts/book.02.04.md#41-响应式数据与副作用函数)
+- [4.2 响应式数据的基本实现](./drafts/book.02.04.md#42-响应式数据的基本实现)
+- [4.3 设计一个完善的响应系统](./drafts/book.02.04.md#43-设计一个完善的响应系统)
+- [4.4 分支切换与 cleanup](./drafts/book.02.04.md#44-分支切换与-cleanup)
+- [4.5 嵌套的 effect 与 effect 栈](./drafts/book.02.04.md#45-嵌套的-effect-与-effect-栈)
+- [4.6 避免无限递归循环](./drafts/book.02.04.md#46-避免无限递归循环)
+- [4.7 调度执行](./drafts/book.02.04.md#47-调度执行)
+- [4.8 计算属性 computed 与 lazy](./drafts/book.02.04.md#48-计算属性-computed-与-lazy)
+- [4.9 watch 的实现原理](./drafts/book.02.04.md#49-watch-的实现原理)
+- [4.10 立即执行的 watch 与回调执行时机](./drafts/book.02.04.md#410-立即执行的-watch-与回调执行时机)
+- [4.11 过期的副作用](./drafts/book.02.04.md#411-过期的副作用)
+- [4.12 总结](./drafts/book.02.04.md#412-总结)
+
 #### 第 5 章 非原始值的响应式方案
 
 [./drafts/book.02.05.md](./drafts/book.02.05.md)
