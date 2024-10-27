@@ -9,8 +9,8 @@
 - [2.3 框架要做到良好的 Tree-Shaking](#23-框架要做到良好的-tree-shaking)
 - [2.4 框架应该输出怎样的构建产物](#24-框架应该输出怎样的构建产物)
   - [IIFE 立即调用的函数表达式](#iife-立即调用的函数表达式)
-- [主流浏览器已普遍支持的 ESM](#主流浏览器已普遍支持的-esm)
-- [Node.js 使用的 CommonJS 模块](#nodejs-使用的-commonjs-模块)
+  - [主流浏览器已普遍支持的 ESM](#主流浏览器已普遍支持的-esm)
+  - [Node.js 使用的 CommonJS 模块](#nodejs-使用的-commonjs-模块)
 - [2.5 特性开关](#25-特性开关)
 - [2.6 错误处理](#26-错误处理)
 - [2.7 良好的 TypeScript 类型支持](#27-良好的-typescript-类型支持)
@@ -66,13 +66,13 @@ var Vue = (function(exports) {
 
 这里，作者还详细介绍了想要做到 XX 类输出，如何在 rollup.global.js 中配置，比如改成 `output: { format: 'iife' }` 。这里不多纪录了。
 
-### 主流浏览器已普遍支持的 ESM
+#### 主流浏览器已普遍支持的 ESM
 
 ```js
 <script type="module" src="/path/to/vue.esm-browser.js"></script>
 ```
 
-### Node.js 使用的 CommonJS 模块
+#### Node.js 使用的 CommonJS 模块
 
 ```js
 const Vue = require('vue')
